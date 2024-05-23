@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MatCheckbox } from '@angular/material/checkbox';
+import { MaterialModule } from './material.module';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatCheckbox],
+  imports: [RouterOutlet, MaterialModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
