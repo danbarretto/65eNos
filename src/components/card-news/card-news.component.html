@@ -13,9 +13,20 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-stroked-button>Ler mais</button>
-    <button mat-flat-button extended class="sound_card_button">
-      <mat-icon>volume_up</mat-icon>
-      Ouvir
-    </button>
+    @switch (audioState) {
+      @case(State.Initial) {
+      <button mat-flat-button extended class="sound_card_button" (click)="toggleAudioState()">
+        <mat-icon>volume_up</mat-icon>
+        Ouvir
+      </button>
+      }
+      @case(State.Play){ 
+        <audio controls>
+          <source src="" type="audio/ogg">
+          <source src="" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      }
+    }
   </mat-card-actions>
 </mat-card>
