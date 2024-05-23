@@ -16,11 +16,16 @@ export class LoginComponent implements OnInit {
 
   email: string = ''
   password: string = ''
+  showPassword = false
 
   constructor() {
   }
 
   ngOnInit() {
+  }
+
+  togglePassword(){
+    this.showPassword = !this.showPassword
   }
 
 }
