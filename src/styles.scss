@@ -1,12 +1,16 @@
 @use '@angular/material' as mat;
-@use '../m3-theme.scss';
 
 @include mat.core();
+$light-theme: mat.define-theme((color: (theme-type: light,
+                primary: mat.$green-palette,
+            ),
+        ));
+$dark-theme: mat.define-theme((color: (theme-type: dark)));
 
-html,* {
+html {
     // Apply the light theme by default
-    @include mat.core-theme(m3-theme.$light-theme);
-    @include mat.button-theme(m3-theme.$light-theme);
+    @include mat.all-component-themes($light-theme);
+
 }
 
 
