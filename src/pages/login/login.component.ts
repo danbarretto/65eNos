@@ -3,6 +3,7 @@ import { MaterialModule } from '../../app/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconRegistry } from '@angular/material/icon';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'login',
@@ -18,14 +19,18 @@ export class LoginComponent implements OnInit {
   password: string = ''
   showPassword = false
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
   }
 
-  togglePassword(){
+  togglePassword() {
     this.showPassword = !this.showPassword
+  }
+
+  createAccount() {
+    this.router.navigateByUrl('account/create')
   }
 
 }
