@@ -1,0 +1,77 @@
+<mat-toolbar>
+
+</mat-toolbar>
+
+<main class="main-container">
+  <section class="inputs">
+    <mat-form-field class="example-form-field">
+      <mat-label>Nome</mat-label>
+      <input matInput type="name" [(ngModel)]="name">
+      @if (name) {
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="name=''">
+        <mat-icon>clear</mat-icon>
+      </button>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="example-form-field">
+      <mat-label>Sobrenome</mat-label>
+      <input matInput type="lastName" [(ngModel)]="lastName">
+      @if (lastName) {
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="lastName=''">
+        <mat-icon>clear</mat-icon>
+      </button>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="example-form-field">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" [(ngModel)]="email">
+      @if (email) {
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="email=''">
+        <mat-icon>clear</mat-icon>
+      </button>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="example-form-field">
+      <mat-label>Confirmar email</mat-label>
+      <input matInput type="email" [(ngModel)]="confirmEmail">
+      @if (confirmEmail) {
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="confirmEmail=''">
+        <mat-icon>clear</mat-icon>
+      </button>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="example-form-field">
+      <mat-label>Senha</mat-label>
+      <input matInput [type]="showPassword ? 'text': 'password'" [(ngModel)]="password">
+      @if (password) {
+      <button (click)="togglePassword('password')" matSuffix mat-icon-button>
+        <mat-icon>{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="example-form-field">
+      <mat-label>Confirmar senha</mat-label>
+      <input matInput [type]="showConfirmPassword ? 'text': 'password'" [(ngModel)]="confirmPassword">
+      @if (password) {
+      <button (click)="togglePassword('confirm')" matSuffix mat-icon-button>
+        <mat-icon>{{showConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      }
+    </mat-form-field>
+
+    
+    <button mat-flat-button [disabled]="!name || !lastName || !email || !confirmEmail || !password || !confirmPassword">Criar conta</button>
+
+
+  </section>
+  <div class="buttons">
+    <mat-label>Ou entre com:</mat-label>
+    <button mat-stroked-button>
+      Entrar com Google</button>
+  </div>
+</main>
