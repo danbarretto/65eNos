@@ -26,11 +26,17 @@
 
     <mat-form-field class="example-form-field">
       <mat-label>Email</mat-label>
-      <input matInput type="email" [(ngModel)]="email">
+      <input matInput type="email" [(ngModel)]="email" [formControl]="emailFormControl" [errorStateMatcher]="errorMatcher">
       @if (email) {
-      <button matSuffix mat-icon-button aria-label="Clear" (click)="email=''">
-        <mat-icon>clear</mat-icon>
-      </button>
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="email=''">
+          <mat-icon>clear</mat-icon>
+        </button>
+      }
+      @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+        <mat-error>Por favor, coloque um email válido. Ex: seunome&#64;exemplo.com</mat-error>
+      }
+      @if (emailFormControl.hasError('required')) {
+        <mat-error>Email é um campo <strong>obrigatório</strong></mat-error>
       }
     </mat-form-field>
 
@@ -46,11 +52,24 @@
 
     <mat-form-field class="example-form-field">
       <mat-label>Senha</mat-label>
-      <input matInput [type]="showPassword ? 'text': 'password'" [(ngModel)]="password">
+      <input matInput [type]="showPassword ? 'text': 'password'" [(ngModel)]="password" [formControl]="passwordFormControl" [errorStateMatcher]="errorMatcher">
       @if (password) {
-      <button (click)="togglePassword('password')" matSuffix mat-icon-button>
-        <mat-icon>{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
+        <button (click)="togglePassword('password')" matSuffix mat-icon-button>
+          <mat-icon>{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      }
+      @if (!password){
+        <mat-hint>Sua senha deve conter pelo menos uma letra maiúscula, uma minúscula, um número e um caracter especial (!&#64;#$%)</mat-hint>
+      }
+      @if (passwordFormControl.hasError('required')) {
+        <mat-error>Senha é um campo <strong>obrigatório</strong></mat-error>
+      }
+      @else if (passwordFormControl.hasError('minlength')) {
+        <mat-error>Sua senha deve ter <strong>pelo menos 10 caracteres</strong></mat-error>
+      }
+      @else if (passwordFormControl.hasError('pattern')) {
+        <!-- TODO: Melhorar mensagem de erro -->
+        <mat-error>Sua senha precisa melhorar</mat-error>
       }
     </mat-form-field>
 
@@ -65,7 +84,9 @@
     </mat-form-field>
 
     
-    <button mat-flat-button [disabled]="!name || !lastName || !email || !confirmEmail || !password || !confirmPassword">Criar conta</button>
+    <button mat-flat-button [disabled]="!name || !lastName || !email || !confirmEmail || !password || !confirmPassword">
+      Criar conta
+    </button>
 
 
   </section>
