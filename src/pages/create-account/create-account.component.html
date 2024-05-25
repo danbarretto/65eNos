@@ -59,17 +59,25 @@
         </button>
       }
       @if (!password){
-        <mat-hint>Sua senha deve conter pelo menos uma letra maiúscula, uma minúscula, um número e um caracter especial (!&#64;#$%)</mat-hint>
+        <mat-hint>Sua senha deve conter pelo menos uma letra maiúscula, uma minúscula, um número e um caracter especial (!&#64;#$%&*)</mat-hint>
       }
       @if (passwordFormControl.hasError('required')) {
         <mat-error>Senha é um campo <strong>obrigatório</strong></mat-error>
       }
-      @else if (passwordFormControl.hasError('minlength')) {
+      @else if (passwordFormControl.hasError('minLength')) {
         <mat-error>Sua senha deve ter <strong>pelo menos 10 caracteres</strong></mat-error>
       }
-      @else if (passwordFormControl.hasError('pattern')) {
-        <!-- TODO: Melhorar mensagem de erro -->
-        <mat-error>Sua senha precisa melhorar</mat-error>
+      @else if (passwordFormControl.hasError('lowerCase')) {
+        <mat-error>Sua senha precisa ter pelo menos uma letra minúscula</mat-error>
+      }
+      @else if (passwordFormControl.hasError('upperCase')) {
+        <mat-error>Sua senha precisa ter pelo menos uma letra maiúscula</mat-error>
+      }
+      @else if (passwordFormControl.hasError('digit')) {
+        <mat-error>Sua senha precisa ter pelo menos um número</mat-error>
+      }
+      @else if (passwordFormControl.hasError('specialChar')) {
+        <mat-error>Sua senha precisa ter pelo menos um character especial (!&#64;#$%&*)</mat-error>
       }
     </mat-form-field>
 
