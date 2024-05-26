@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 //import {Component} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import { MaterialModule } from '../../app/material.module';
 import {MatCardModule} from '@angular/material/card';
+import { GridOfNewsComponent, NewsDto } from '../grid-of-news/grid-of-news.component';
 
 export enum AudioState{
   Initial = 0,
@@ -21,9 +22,12 @@ export enum AudioState{
 
 
 export class CardNewsComponent implements OnInit {
-  
+
+@Input() news: NewsDto;
+
 State = AudioState
 audioState: AudioState = AudioState.Initial;
+
 
   constructor() { }
 

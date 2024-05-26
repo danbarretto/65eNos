@@ -1,15 +1,57 @@
 .card-news {
-    max-width: 50em;
+    // min-width: 10em;
+    display: flex;
+    max-width: 30em;
     background-color: white;
   }
 
-  .sound_card_button {
-   // background-color: beige;
+  .card-news img {
+    max-height: 22em;
+    object-fit: cover;
   }
 
-//   .card-news img {
-//     width: 100%; /* Define a largura para 100% do contêiner */
-//     height: auto; /* Mantém a proporção original da imagem */
-//     max-height: 200px; /* Define a altura máxima desejada */
-//     object-fit: contain; /* Garante que a imagem se encaixe no contêiner sem distorção */
-//   }
+  .textContentContainer {
+    // height: 15em;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .textContentContainer * {
+    margin: 0.2em;
+  }
+
+  .title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    white-space: pre-wrap;
+  }
+
+  .subtitle {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    white-space: pre-wrap;
+  }
+
+  .summary {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    white-space: pre-wrap;
+    
+  }
+
+  .buttons {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: end;
+  }
+
+  .buttons * {
+    margin: 0.2em;
+  }

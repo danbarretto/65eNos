@@ -1,17 +1,21 @@
 <mat-card class="card-news">
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-  <mat-card-header>
-    <mat-card-title>Notícia 1</mat-card-title>
-    <mat-card-subtitle>Veja como envelhecer com elegância</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <p>
-      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-      bred for hunting.
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
+  <img mat-card-image src='{{news.image}}' alt={{news.image_alt}}>
+  <div class = 'textContent'>
+    <mat-card-header>
+      <mat-card-title matTooltip={{news.title}} matTooltipPosition="below" matTooltipShowDelay="1000">
+        <p class="title">{{news.title}}</p>
+      </mat-card-title>
+      <mat-card-subtitle>
+        <p class="subtitle">{{news.subtitle}}</p>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class = "summary"> 
+      <p class = "summary">
+        {{news.summary}}
+      </p>
+    </mat-card-content>
+  </div>
+  <mat-card-actions class="buttons">
     <button mat-stroked-button>Ler mais</button>
     @switch (audioState) {
       @case(State.Initial) {
@@ -22,8 +26,8 @@
       }
       @case(State.Play){ 
         <audio controls>
-          <source src="" type="audio/ogg">
-          <source src="" type="audio/mpeg">
+          <source src="../../assets/audio/teste.mp3" type="audio/mpeg">
+          <source src="../../assets/audio/teste.ogg" type="audio/ogg">
           Your browser does not support the audio element.
         </audio>
       }
