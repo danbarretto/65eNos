@@ -1,0 +1,39 @@
+<top-app-bar></top-app-bar>
+
+<p class="breadcrumb"><a href="">Home</a> > {{article.title}}</p>
+
+<main class="container">
+  <article>
+    <img [src]="article.imagePath">
+
+    <h1>{{article.title}}</h1>
+
+    @if(audioState === State.Initial){
+      <button (click)="audioState = State.Play" mat-raised-button>
+        <mat-icon>
+          volume_up
+        </mat-icon>
+        Clique aqui para ouvir a notícia
+      </button>
+    }@else {
+      <audio (pause)="audioState = State.Pause" (play)="audioState = State.Play" controls>
+        <source src="../../assets/audio/teste.mp3" type="audio/mpeg">
+        <source src="../../assets/audio/teste.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+      </audio>
+    }
+
+    <p>
+      {{article.content}}
+    </p>
+  </article>
+</main>
+
+<div class="fab-container">
+
+  <button mat-fab extended color="success">
+    <mat-icon svgIcon="whatsapp"></mat-icon>
+    Compartilhar
+  </button>
+  <scroll-top-button></scroll-top-button>
+</div>
