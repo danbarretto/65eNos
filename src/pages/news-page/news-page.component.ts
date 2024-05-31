@@ -7,13 +7,14 @@ import { ViewportScroller } from '@angular/common';
 import { ScrollTopButtonComponent } from '../../components/scroll-top-button/scroll-top-button.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AudioState } from '../../components/card-news/card-news.component';
+import { CommentSectionComponent } from '../../components/comment-section/comment-section.component';
 
 @Component({
   selector: 'app-news-page',
   templateUrl: './news-page.component.html',
   styleUrls: ['./news-page.component.scss'],
   standalone: true,
-  imports: [MaterialModule, TopAppBarComponent, ScrollTopButtonComponent, HttpClientModule]
+  imports: [MaterialModule, TopAppBarComponent, ScrollTopButtonComponent, HttpClientModule, CommentSectionComponent]
 })
 export class NewsPageComponent implements OnInit {
 

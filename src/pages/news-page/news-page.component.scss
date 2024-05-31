@@ -10,12 +10,22 @@
         align-items: center;
         padding: 2em;
 
-        width: 80em;
+        width: 60%;
 
-        img {
-            width: 30em;
+        h1{
+            margin: 0;
         }
 
+        img {
+            width: 100%;
+        }
+        p{
+            font-size: medium;
+        }
+
+        comment-section{
+            width: 100%;
+        }
     }
 }
 

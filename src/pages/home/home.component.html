@@ -4,4 +4,7 @@
 
 <top-app-bar></top-app-bar>
 
-<button mat-button>Teste botão</button>
+@for(article of articles; track article.id){
+
+    <button mat-button (click)="goToArticle(article)">Teste botão</button>
+}
