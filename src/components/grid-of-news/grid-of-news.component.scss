@@ -1,0 +1,12 @@
+.flex-box--news-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: white;
+
+}
+
+.flex-box--news-grid > app-card-news{
+    margin: 10px;
+}
