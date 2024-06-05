@@ -3,7 +3,11 @@
 <top-app-bar></top-app-bar>
 
 @for(article of articles; track article.id){
-
-    <button mat-button (click)="goToArticle(article)">Teste botão</button>
+    <div class="news">
+        <button mat-button (click)="goToArticle(article)">
+        </button>
+        
+    </div>
 }
 <app-footer></app-footer>
+
