@@ -1,0 +1,89 @@
+footer{
+    width: 100%;
+    color: white;
+
+}
+
+.footer_content{
+    background-color: rgb(70, 67, 67);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0.5rem;
+    padding: 3rem 3.5rem;
+}
+
+.footer_contacts{
+    margin-bottom: 0.5rem;
+}
+
+.footer_social_media{
+    display: flex;
+    gap:1.5rem;
+    margin-top: 1.5rem;
+}
+
+.footer_social_media .footer_link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: all 0.4s;
+    font-size: 1.5rem;
+}
+.footer_link{
+    color: white;
+}
+
+.footer_social_media .footer_link:hover{
+    opacity: 0.5;
+}
+
+#instagram{ 
+    background: linear-gradient(purple,rgb(250, 0, 125),orange);
+}
+#facebook{
+    background: rgba(22, 22, 211, 0.651);
+}
+
+#linkedin{
+    background: rgba(173, 216, 230, 0.568);
+}
+
+#whatsapp{
+    background: rgba(4, 218, 4, 0.801);
+}
+
+#youtube{
+    background: rgba(211, 0, 0, 0.801);
+}
+
+.footer_list{
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    list-style: none;
+    transition: all 0.4s;
+}
+
+.footer_list .footer_link:hover{
+    color: rgba(131, 250, 141, 0.822);
+}
+
+.footer_copyright{
+    background-color: rgba(3, 170, 59, 0.877);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+@media screen and (max-width: 426px){
+    .footer_content{
+        grid-template-columns: repeat(1,1fr);
+        gap: 3rem;
+    }
+}
