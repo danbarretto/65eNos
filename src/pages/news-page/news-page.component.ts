@@ -8,6 +8,7 @@ import { ScrollTopButtonComponent } from '../../components/scroll-top-button/scr
 import { HttpClientModule } from '@angular/common/http';
 import { AudioState } from '../../components/card-news/card-news.component';
 import { CommentSectionComponent } from '../../components/comment-section/comment-section.component';
+import { FontSizeService } from '../../services/font-size.service';
 
 @Component({
   selector: 'app-news-page',
@@ -23,7 +24,8 @@ export class NewsPageComponent implements OnInit {
   audioState: AudioState = AudioState.Initial
   State = AudioState
 
-  constructor(private route: ActivatedRoute, private newsService: NewsService
+  constructor(private route: ActivatedRoute, private newsService: NewsService,
+    private fontSizeService: FontSizeService
   ) {
   }
 

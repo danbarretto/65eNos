@@ -36,21 +36,20 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-/* styles.css */
-html {
-    font-size: 16px; /* Tamanho de fonte padrão */
-  }
-  
-.small-font {
+html.small-font {
     font-size: 12px;
 }
 
-.medium-font {
+html.medium-font {
     font-size: 16px; /* Tamanho de fonte padrão */
 }
 
-.large-font {
+html.large-font {
     font-size: 20px;
+}
+
+html.extra-large-font{
+    font-size:24px;
 }
 
 @media only screen and (max-width: 768px) {
