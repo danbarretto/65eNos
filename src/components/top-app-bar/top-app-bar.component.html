@@ -13,19 +13,19 @@
 			<mat-icon>help</mat-icon>
 		</button>
 
-		<button mat-icon-button class="example-icon" title="Accesibilidade">
+		<button mat-icon-button class="example-icon" title="Acessibilidade">
 			<mat-icon>settings_accessibility</mat-icon>
 		</button>
 
-		<button mat-icon-button class="example-icon" title="Contraste">
+		<button mat-icon-button class="example-icon" title="Contraste" onclick="changeContrast()">
 			<mat-icon>contrast</mat-icon>
 		</button>
 		
-		<button mat-icon-button class="example-icon" title="Aumentar fonte">
+		<button mat-icon-button class="example-icon" title="Aumentar fonte" (click)="increaseFontSize()">
 			<mat-icon>text_increase</mat-icon>
 		</button>
 		
-		<button mat-icon-button class="example-icon" title="Diminuir fonte">
+		<button mat-icon-button class="example-icon" title="Diminuir fonte" (click)="decreaseFontSize()">
 			<mat-icon>text_decrease</mat-icon>
 		</button>
 	</div>
