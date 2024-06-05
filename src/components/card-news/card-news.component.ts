@@ -1,13 +1,12 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 //import {Component} from '@angular/core';
-import {MatButtonModule} from '@angular/material/button';
 import { MaterialModule } from '../../app/material.module';
-import {MatCardModule} from '@angular/material/card';
-import { GridOfNewsComponent, NewsDto } from '../grid-of-news/grid-of-news.component';
+import { NewsArticle } from '../../services/news.service';
+import { Router } from '@angular/router';
 
-export enum AudioState{
+export enum AudioState {
   Initial = 0,
-  Pause = 1, 
+  Pause = 1,
   Play = 2
 }
 
@@ -23,22 +22,27 @@ export enum AudioState{
 
 export class CardNewsComponent implements OnInit {
 
-@Input() news: NewsDto;
+  @Input() news: NewsArticle;
 
-State = AudioState
-audioState: AudioState = AudioState.Initial;
+  State = AudioState
+  audioState: AudioState = AudioState.Initial;
 
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
+
   toggleAudioState() {
     if (this.audioState === AudioState.Initial || this.audioState === AudioState.Pause) {
       this.audioState = AudioState.Play;
     } else {
       this.audioState = AudioState.Pause;
     }
+  }
+
+  openArticle() {
+    this.router.navigateByUrl(`noticias/${this.news.id}`)
   }
 
 }

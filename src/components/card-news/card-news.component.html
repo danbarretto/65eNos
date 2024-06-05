@@ -1,5 +1,5 @@
 <mat-card class="card-news">
-  <img mat-card-image src='{{news.image}}' alt={{news.image_alt}}>
+  <img mat-card-image src='{{news.imagePath}}' alt={{news.imageAlt}}>
   <div class = 'textContent'>
     <mat-card-header>
       <mat-card-title matTooltip={{news.title}} matTooltipPosition="below" matTooltipShowDelay="1000">
@@ -11,12 +11,12 @@
     </mat-card-header>
     <mat-card-content class = "summary"> 
       <p class = "summary">
-        {{news.summary}}
+        {{news.content}}
       </p>
     </mat-card-content>
   </div>
   <mat-card-actions class="buttons">
-    <button mat-stroked-button>Ler mais</button>
+    <button mat-stroked-button (click)="openArticle()">Ler mais</button>
     @switch (audioState) {
       @case(State.Initial) {
       <button mat-flat-button extended class="sound_card_button" (click)="toggleAudioState()">

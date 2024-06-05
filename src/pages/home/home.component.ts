@@ -4,12 +4,13 @@ import { TopAppBarComponent } from '../../components/top-app-bar/top-app-bar.com
 import { FooterComponent } from '../../components/footer/footer.component';
 import { NewsArticle, NewsService } from '../../services/news.service';
 import { Router } from '@angular/router';
+import { GridOfNewsComponent } from '../../components/grid-of-news/grid-of-news.component';
 
 @Component({
   selector: 'home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [MaterialModule, TopAppBarComponent,FooterComponent],
+  imports: [MaterialModule, TopAppBarComponent,FooterComponent, GridOfNewsComponent],
   standalone: true
 })
 export class HomeComponent implements OnInit {
