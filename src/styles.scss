@@ -47,28 +47,28 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-html.small-font p {
-    font-size: 12px;
+html.small-font, html.small-font p {
+    font-size: 14px;
 }
 
-html.medium-font p{
+html.medium-font, html.medium-font p{
     font-size: 16px;
     /* Tamanho de fonte padrão */
     letter-spacing: 1px;
 
 }
-
-html.large-font p{
+html.large-font, html.large-font p{
     font-size: 20px;
     letter-spacing: 1.5px;
-
-    
 }
 
-html.extra-large-font p{
+html.extra-large-font, html.extra-large-font p{
     font-size: 22px;
     letter-spacing: 1.6px;
 }
+
+
+
 
 @media only screen and (max-width: 768px) {
     * {
