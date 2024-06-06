@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 export class CustomValidators {
   /**
@@ -74,7 +74,7 @@ export class UserModel
 })
 export class AuthenticationService {
 
-  validAccounts: UserModel[];
+  validAccounts: UserModel[] = [];
   
   createAccount(user: UserModel): void {    
     if (!user.isValid()) {
@@ -82,6 +82,7 @@ export class AuthenticationService {
     }
     
     this.validAccounts.push(user);
+    console.log('created account:', user)
     // todo: login and go to home;
   }
 }

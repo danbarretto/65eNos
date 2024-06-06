@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 import { MaterialModule } from '../../app/material.module';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CustomValidators } from '../../services/createAccount.service';
+import { AuthenticationService, CustomValidators, UserModel } from '../../services/authentication.service';
 import { ErrorStateMatcher } from '@angular/material/core';
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -47,8 +47,11 @@ export class CreateAccountComponent {
   passwordControl: FormControl;
   confirmPasswordControl: FormControl;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private authService: AuthenticationService, private formBuilder: FormBuilder) {
+    this.buildForm();
+  }
 
+  private buildForm() {
     this.createAccountForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
@@ -62,9 +65,8 @@ export class CreateAccountComponent {
         password: ['', [Validators.required, CustomValidators.password]],
         confirmPassword: ['', [Validators.required]],
       }, { validators: CustomValidators.childrenEqual }),
+    });
 
-    })
-    
     this.createAccountForm.updateValueAndValidity();
 
     this.nameControl = this.createAccountForm.get("name") as FormControl;
@@ -73,10 +75,24 @@ export class CreateAccountComponent {
     this.emailGroup = this.createAccountForm.get("emailGroup") as FormGroup;
     this.emailControl = this.createAccountForm.get(["emailGroup", "email"]) as FormControl;
     this.confirmEmailControl = this.createAccountForm.get(["emailGroup", "confirmEmail"]) as FormControl;
-    
+
     this.passwordGroup = this.createAccountForm.get("passwordGroup") as FormGroup;
     this.passwordControl = this.createAccountForm.get(["passwordGroup", "password"]) as FormControl;
     this.confirmPasswordControl = this.createAccountForm.get(["passwordGroup", "confirmPassword"]) as FormControl;
+  }
+
+  createAccount(): void {
+    if (this.createAccountForm.invalid) {
+      return;
+    }
+    
+    const user: UserModel = new UserModel;
+    user.name = this.nameControl.value;
+    user.lastName = this.lastNameControl.value;
+    user.email = this.emailControl.value;
+    user.password = this.passwordControl.value;
+    
+    this.authService.createAccount(user);
   }
 
   togglePassword(field: 'confirm' | 'password') {
