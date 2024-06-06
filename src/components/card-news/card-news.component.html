@@ -1,4 +1,4 @@
-<mat-card class="card-news">
+<mat-card class="card-news" (click)="openArticle()">
   <img mat-card-image src='{{news.imagePath}}' alt={{news.imageAlt}}>
   <div class = 'textContent'>
     <mat-card-header>
@@ -19,7 +19,7 @@
     <button mat-stroked-button (click)="openArticle()">Ler mais</button>
     @switch (audioState) {
       @case(State.Initial) {
-      <button mat-flat-button extended class="sound_card_button" (click)="toggleAudioState()" aria-label="Ouvir a descrição do artigo">
+      <button mat-flat-button extended class="sound_card_button" (click)="toggleAudioState($event)" aria-label="Ouvir a descrição do artigo">
         <mat-icon>volume_up</mat-icon>
         Ouvir
       </button>
