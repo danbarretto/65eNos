@@ -1,6 +1,6 @@
 <div class="flex-box--news-grid">
 
-  @for (news of newsList; track news) {
+  @for (news of (articles$ | async); track news) {
 
     <app-card-news [news]="news" />
 
