@@ -11,7 +11,8 @@ export type NewsArticle = {
     content: string,
     commentTopic: string,
     imageAlt: string,
-    category: Category
+    category: Category,
+    publicationDate: string
 }
 
 export type Category = 'saúde' | 'bem-estar' | 'dicas' | 'social'
@@ -34,6 +35,13 @@ export class NewsService {
 
     filterByCategory(category: Category) {
         this._articles$.next(articles.filter(art => art.category === category) as NewsArticle[])
+    }
+
+    getSortedByPublicationDate(): void {
+        const sortedArticles = [...this._articles$.getValue()].sort((a, b) => {
+            return new Date(b.publicationDate).getTime() - new Date(a.publicationDate).getTime();
+        });
+        this._articles$.next(sortedArticles);
     }
 
 }
