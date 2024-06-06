@@ -1,0 +1,119 @@
+<mat-toolbar>
+
+</mat-toolbar>
+
+<main class="main-container">
+  <section class="inputs">
+    <form [formGroup]="createAccountForm">
+      <mat-form-field class="example-form-field">
+        <mat-label>Nome</mat-label>
+        <input matInput type="name" formControlName="name">
+        @if (nameControl.value) {
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="nameControl.setValue('')">
+          <mat-icon>clear</mat-icon>
+        </button>
+        }
+      </mat-form-field>
+  
+      <mat-form-field class="example-form-field">
+        <mat-label>Sobrenome</mat-label>
+        <input matInput type="lastName" formControlName="lastName">
+        @if (lastNameControl.value) {
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="lastNameControl.setValue('')">
+          <mat-icon>clear</mat-icon>
+        </button>
+        }
+      </mat-form-field>
+  
+      <mat-form-field class="example-form-field" formGroupName="emailGroup">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" [errorStateMatcher]="errorMatcher">
+        @if (emailControl.value) {
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="emailControl.setValue('')">
+            <mat-icon>clear</mat-icon>
+          </button>
+        }
+        @if (emailControl.hasError('email')) {
+          <mat-error>Por favor, coloque um email válido. Ex: seunome&#64;exemplo.com</mat-error>
+        }
+        @if (emailControl.hasError('required')) {
+          <mat-error>Email é um campo <strong>obrigatório</strong></mat-error>
+        }
+      </mat-form-field>
+  
+      <mat-form-field class="example-form-field" formGroupName="emailGroup">
+        <mat-label>Confirmar email</mat-label>
+        <input matInput type="email" formControlName="confirmEmail" [errorStateMatcher]="confirmErrorMatcher">
+        @if (confirmEmailControl.value) {
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="confirmEmailControl.setValue('')">
+          <mat-icon>clear</mat-icon>
+        </button>
+        }
+  
+        @if (!confirmEmailControl.value){
+          <mat-hint> Deve ser igual ao email. </mat-hint>
+        }
+        @if(emailGroup.hasError("childrenNotEqual")) {
+          <mat-error> Confirmar email e email estão diferentes. </mat-error>
+        }
+      </mat-form-field>
+  
+      <mat-form-field class="example-form-field" formGroupName="passwordGroup">
+        <mat-label>Senha</mat-label>
+        <input matInput [type]="showPassword ? 'text': 'password'" formControlName="password" [errorStateMatcher]="errorMatcher">
+        @if (passwordControl.value) {
+          <button (click)="togglePassword('password')" matSuffix mat-icon-button>
+            <mat-icon>{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        }
+        @if (!passwordControl.value){
+          <mat-hint>Sua senha deve conter pelo menos uma letra maiúscula, uma minúscula, um número e um caracter especial (!&#64;#$%&*)</mat-hint>
+        }
+        @if (passwordControl.hasError('required')) {
+          <mat-error>Senha é um campo <strong>obrigatório</strong></mat-error>
+        }
+        @else if (passwordControl.hasError('minLength')) {
+          <mat-error>Sua senha deve ter <strong>pelo menos 10 caracteres</strong></mat-error>
+        }
+        @else if (passwordControl.hasError('lowerCase')) {
+          <mat-error>Sua senha precisa ter pelo menos uma letra minúscula</mat-error>
+        }
+        @else if (passwordControl.hasError('upperCase')) {
+          <mat-error>Sua senha precisa ter pelo menos uma letra maiúscula</mat-error>
+        }
+        @else if (passwordControl.hasError('digit')) {
+          <mat-error>Sua senha precisa ter pelo menos um número</mat-error>
+        }
+        @else if (passwordControl.hasError('specialChar')) {
+          <mat-error>Sua senha precisa ter pelo menos um character especial (!&#64;#$%&*)</mat-error>
+        }
+      </mat-form-field>
+  
+      <mat-form-field class="example-form-field" formGroupName="passwordGroup">
+        <mat-label>Confirmar senha</mat-label>
+        <input matInput [type]="showConfirmPassword ? 'text': 'password'" formControlName="confirmPassword" [errorStateMatcher]="confirmErrorMatcher">
+        
+        @if (confirmPasswordControl.value) {
+        <button (click)="togglePassword('confirm')" matSuffix mat-icon-button>
+          <mat-icon>{{showConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        }
+
+        @if (passwordGroup.hasError("childrenNotEqual")) {
+          <mat-error> Confirmar senha e senha estão diferentes. </mat-error>
+        }
+      </mat-form-field>
+      
+      <button mat-flat-button [disabled]="createAccountForm.invalid" (click)="createAccount()">
+        Criar conta
+      </button>
+    </form>
+    
+
+  </section>
+  <div class="buttons">
+    <mat-label>Ou entre com:</mat-label>
+    <button mat-stroked-button>
+      Entrar com Google</button>
+  </div>
+</main>
