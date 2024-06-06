@@ -5,12 +5,19 @@ $light-theme: mat.define-theme((color: (theme-type: light,
                 primary: mat.$green-palette,
             ),
         ));
-$dark-theme: mat.define-theme((color: (theme-type: dark)));
+$dark-theme: mat.define-theme((color: (theme-type: dark,
+                primary: mat.$green-palette,
+            ),
+        ));
 
-html {
+
+body {
     // Apply the light theme by default
     @include mat.all-component-themes($light-theme);
+}
 
+body.dark-theme {
+    @include mat.all-component-colors($dark-theme);
 }
 
 
@@ -41,19 +48,20 @@ html.small-font {
 }
 
 html.medium-font {
-    font-size: 16px; /* Tamanho de fonte padrão */
+    font-size: 16px;
+    /* Tamanho de fonte padrão */
 }
 
 html.large-font {
     font-size: 20px;
 }
 
-html.extra-large-font{
-    font-size:24px;
+html.extra-large-font {
+    font-size: 24px;
 }
 
 @media only screen and (max-width: 768px) {
-    *{
+    * {
         overflow-x: hidden;
     }
 }
