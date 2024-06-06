@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs'
 
 export class CustomValidators {
   /**
@@ -73,10 +74,13 @@ export class UserModel {
   providedIn: 'root'
 })
 export class AuthenticationService {
-
   validAccounts: UserModel[] = [];
 
   private currentUser: UserModel | undefined;
+  private _user$ = new Subject<UserModel>()
+  public get user$(){
+    return this._user$.asObservable()
+  }
 
   constructor(private router: Router) {
 
@@ -106,11 +110,16 @@ export class AuthenticationService {
       this.router.navigateByUrl('/');
       console.log('logging in as: %s', this.currentUser.getFullName());
     }
-
+    this._user$.next(this.currentUser)
     return !!this.currentUser;
   }
 
-  getCurrentUser() {
-    return this.currentUser
+  logOut(): void {
+    this.currentUser = undefined;
+    this._user$.next(this.currentUser)
+  }
+  
+  getCurrentUser(): UserModel {
+    return this.currentUser;
   }
 }

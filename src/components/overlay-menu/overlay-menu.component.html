@@ -1,0 +1,56 @@
+<div>
+    
+  <div class="menu-label">
+    <button aria-label="Botão de fechar menu." mat-icon-button> 
+      Menu
+      <mat-icon> close </mat-icon>
+    </button>
+  </div>
+
+  @if (currentUser) {
+    <button aria-label="Botão de usuário." mat-button>  
+      <mat-icon> account_circle </mat-icon>
+      {{userFullName}}
+    </button>
+  }
+  @else {
+    <button aria-label="Botão de entrar na conta." (click)="loginIn()" mat-flat-button extended>
+      Entrar
+    </button>
+  
+    <button aria-label="Botão de criar conta." (click)="createAccount()" mat-flat-button extended>
+      Criar Conta
+    </button>
+  }
+  
+  
+  <div>
+    <mat-divider></mat-divider>
+    @for (topic of topics; track $index) {
+      <button [ariaLabel]="'Botão de navegar para o tópico de ' + topic" mat-button extended> 
+        <mat-icon iconPositionEnd>navigate_next</mat-icon>
+        {{topic}}
+      </button>
+      <mat-divider></mat-divider>
+    }
+  </div>
+
+  <div>
+    @for (menuLink of links; track $index) {
+      <button class="link-button" [ariaLabel]="'Botão de + {{label}}'" mat-button>
+        <mat-icon>{{menuLink.icon}}</mat-icon>
+        {{menuLink.label}}
+      </button>
+      <mat-divider></mat-divider>
+    }
+  </div>
+  
+  @if (currentUser) {
+    <div>
+      <button aria-label="Botão de sair da conta." (click)="logOut()" mat-button>
+        <mat-icon>logout</mat-icon>
+        Logout
+      </button>
+    </div>
+  }
+</div>
