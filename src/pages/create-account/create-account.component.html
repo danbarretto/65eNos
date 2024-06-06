@@ -103,11 +103,12 @@
           <mat-error> Confirmar senha e senha estão diferentes. </mat-error>
         }
       </mat-form-field>
+      
+      <button mat-flat-button [disabled]="createAccountForm.invalid">
+        Criar conta
+      </button>
     </form>
     
-    <button mat-flat-button [disabled]="createAccountForm.pristine">
-      Criar conta
-    </button>
 
   </section>
   <div class="buttons">
