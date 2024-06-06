@@ -1,15 +1,23 @@
 /* eslint-disable @angular-eslint/component-selector */
 import { Component } from '@angular/core';
 import { MaterialModule } from '../../app/material.module';
-import { FormControl, FormGroupDirective, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
-import { CreateAccountService } from '../../services/createAccount.service';
+import { FormBuilder, FormControl, FormGroup, FormGroupDirective, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CustomValidators } from '../../services/createAccount.service';
 import { ErrorStateMatcher } from '@angular/material/core';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class CustomErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+    return (control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class ConfirmValidParentErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return (control && control.invalid && (control.dirty || control.touched || isSubmitted)) || (control && control.parent && control.parent.invalid  && (control.parent.dirty || control.parent.touched || isSubmitted));
   }
 }
 
@@ -21,41 +29,61 @@ export class CustomErrorStateMatcher implements ErrorStateMatcher {
   standalone: true
 })
 export class CreateAccountComponent {
-  name: string = ''
-  lastName: string = ''
-  email: string = ''
-  password: string = ''
-  confirmEmail: string = ''
-  confirmPassword: string = ''
   showPassword = false
   showConfirmPassword = false
-  
-  emailFormControl: FormControl;
-  passwordFormControl: FormControl;
+
   errorMatcher = new CustomErrorStateMatcher();
+  confirmErrorMatcher = new ConfirmValidParentErrorStateMatcher();
+  createAccountForm: FormGroup;
 
-  constructor(private createAccService: CreateAccountService) { 
-    this.emailFormControl = createAccService.emailFormControl;
-    this.passwordFormControl = createAccService.passwordFormControl;
-  }
+  nameControl: FormControl;
+  lastNameControl: FormControl;
 
-  printErrors() {
-    console.log(this.passwordFormControl.errors);
-  }
+  emailGroup: FormGroup;
+  emailControl: FormControl;
+  confirmEmailControl: FormControl;
   
-  isConfirmEmailEqual(): boolean {
-      return this.createAccService.isEqual(this.email, this.confirmEmail)
+  passwordGroup: FormGroup;
+  passwordControl: FormControl;
+  confirmPasswordControl: FormControl;
+
+  constructor(private formBuilder: FormBuilder) {
+
+    this.createAccountForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+
+      emailGroup: this.formBuilder.group({
+        email: ['', [Validators.required, Validators.email]],
+        confirmEmail: ['', [Validators.required]]
+      }, { validators: CustomValidators.childrenEqual }),
+
+      passwordGroup: this.formBuilder.group({
+        password: ['', [Validators.required, CustomValidators.password]],
+        confirmPassword: ['', [Validators.required]],
+      }, { validators: CustomValidators.childrenEqual }),
+
+    })
+    
+    this.createAccountForm.updateValueAndValidity();
+
+    this.nameControl = this.createAccountForm.get("name") as FormControl;
+    this.lastNameControl = this.createAccountForm.get("lastName") as FormControl;
+
+    this.emailGroup = this.createAccountForm.get("emailGroup") as FormGroup;
+    this.emailControl = this.createAccountForm.get(["emailGroup", "email"]) as FormControl;
+    this.confirmEmailControl = this.createAccountForm.get(["emailGroup", "confirmEmail"]) as FormControl;
+    
+    this.passwordGroup = this.createAccountForm.get("passwordGroup") as FormGroup;
+    this.passwordControl = this.createAccountForm.get(["passwordGroup", "password"]) as FormControl;
+    this.confirmPasswordControl = this.createAccountForm.get(["passwordGroup", "confirmPassword"]) as FormControl;
   }
 
-  isConfirmPasswordEqual(): boolean {
-      return this.createAccService.isEqual(this.password, this.confirmPassword)
-  }
-
-  togglePassword(field:'confirm'|'password'){
-    if (field === 'confirm'){
+  togglePassword(field: 'confirm' | 'password') {
+    if (field === 'confirm') {
       this.showConfirmPassword = !this.showConfirmPassword
       return
     }
-    this.showPassword = !this.showPassword 
+    this.showPassword = !this.showPassword
   }
 }

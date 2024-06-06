@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl, FormControl, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
-class CustomValidators {
+export class CustomValidators {
   /**
    * @description Validator for password.
    *   
@@ -25,7 +25,7 @@ class CustomValidators {
       return null;
     }
     if (value.length < minLength) {
-      validationErrors["minLength"] = { minLength: minLength, actual: value.length } 
+      validationErrors["minLength"] = { minLength: minLength, actual: value.length }
     }
     if (!lowerCaseRegex.test(value)) {
       validationErrors["lowerCase"] = { lowerCase: false }
@@ -42,25 +42,46 @@ class CustomValidators {
 
     return Object.is(validationErrors, {}) ? null : validationErrors;
   }
+
+  static childrenEqual: ValidatorFn = (formGroup: FormGroup) => {
+    const [firstControlName, ...otherControlNames] = Object.keys(formGroup.controls || {});
+    const isValid = otherControlNames.every(controlName => formGroup.get(controlName).value === formGroup.get(firstControlName).value);
+    return isValid ? null : { childrenNotEqual: true };
+  }
+}
+
+export class UserModel
+{
+  name: string;
+  lastName: string;
+  email: string;
+  password: string;
+
+  getFullName(): string {
+    return this.name + this.lastName;
+  }
+
+  isValid(): boolean {
+    return this.name.length > 0 && 
+      this.lastName.length > 0 && 
+      this.email.length > 0 && 
+      this.password.length > 0;
+  }
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class CreateAccountService {
-  
-  private readonly _emailFormControl: FormControl = new FormControl('', [Validators.required, Validators.email]);
-  private readonly _passwordFormControl: FormControl = new FormControl('', [Validators.required, CustomValidators.password]);
-  
-  public get emailFormControl(): FormControl {
-    return this._emailFormControl;
-  }
-  
-  public get passwordFormControl(): FormControl {
-    return this._passwordFormControl;
-  }
+export class AuthenticationService {
 
-  isEqual(field1: string, field2: string): boolean {
-    return field1 === field2;
+  validAccounts: UserModel[];
+  
+  createAccount(user: UserModel): void {    
+    if (!user.isValid()) {
+      return;
+    }
+    
+    this.validAccounts.push(user);
+    // todo: login and go to home;
   }
 }
