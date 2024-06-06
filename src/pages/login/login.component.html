@@ -7,33 +7,40 @@
     alt="Logo do 65eNos, possui um desenho cartoonizado de um idoso com as palavras 65 e Nós ao redor dele em formato circular na cor verde escuro" />
 
   <section class="inputs">
-    <mat-form-field class="example-form-field">
-      <mat-label>Email</mat-label>
-      <input matInput type="email" [(ngModel)]="email">
-      @if (email) {
-      <button matSuffix mat-icon-button aria-label="Clear" (click)="email=''">
-        <mat-icon>clear</mat-icon>
-      </button>
+    <form (ngSubmit)="login()">
+
+      @if (errorMessage) {
+        <mat-error> {{errorMessage}} </mat-error>
       }
-    </mat-form-field>
 
-    <mat-form-field class="example-form-field">
-      <mat-label>Senha</mat-label>
-      <input matInput [type]="showPassword ? 'text': 'password'" [(ngModel)]="password">
-      @if (password) {
-      <button (click)="togglePassword()" matSuffix mat-icon-button>
-        <mat-icon>{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
-      }
-    </mat-form-field>
-    <button mat-flat-button [disabled]="!email || !password">Entrar</button>
-
-
+      <mat-form-field class="example-form-field">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" [(ngModel)]="email" name="email">
+        @if (email) {
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="email=''">
+          <mat-icon>clear</mat-icon>
+        </button>
+        }
+      </mat-form-field>
+  
+      <mat-form-field class="example-form-field">
+        <mat-label>Senha</mat-label>
+        <input matInput [type]="showPassword ? 'text': 'password'" [(ngModel)]="password" name="password">
+        @if (password) {
+        <button (click)="togglePassword()" matSuffix mat-icon-button>
+          <mat-icon>{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        }
+      </mat-form-field>
+      <button (click)="login()" mat-flat-button [disabled]="!email || !password">Entrar</button>
+    </form>
   </section>
+
   <div class="buttons">
     <mat-label>Ou entre com:</mat-label>
     <button mat-stroked-button>
-      Entrar com Google</button>
+      Entrar com Google
+    </button>
     <button (click)="createAccount()" mat-stroked-button>
       Criar Conta
     </button>

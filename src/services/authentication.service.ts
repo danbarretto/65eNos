@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 export class CustomValidators {
   /**
@@ -58,7 +59,7 @@ export class UserModel
   password: string;
 
   getFullName(): string {
-    return this.name + this.lastName;
+    return this.name + ' ' + this.lastName;
   }
 
   isValid(): boolean {
@@ -76,13 +77,37 @@ export class AuthenticationService {
 
   validAccounts: UserModel[] = [];
   
+  private currentUser: UserModel | undefined;
+
+  constructor(private router: Router) {
+    
+  }
+
   createAccount(user: UserModel): void {    
     if (!user.isValid()) {
       return;
     }
     
+    console.log('created account:', user.getFullName())
+    
     this.validAccounts.push(user);
-    console.log('created account:', user)
-    // todo: login and go to home;
+    this.login(user.email, user.password);
+  }
+
+  login(email: string, password: string): boolean {
+    if (this.currentUser !== undefined) {
+      this.router.navigateByUrl('/');
+      console.log('logging in as: %s', this.currentUser.getFullName());
+      return true;
+    }
+
+    this.currentUser = this.validAccounts.find(user => user.email === email && user.password === password);
+    
+    if (this.currentUser !== undefined) {
+      this.router.navigateByUrl('/');
+      console.log('logging in as: %s', this.currentUser.getFullName());
+    }
+    
+    return !!this.currentUser;
   }
 }
