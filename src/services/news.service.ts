@@ -49,7 +49,11 @@ export class NewsService {
             this.resetArticles()
             return
         }
-        const arts = articles.filter(art => art.title.includes(query) || art.content.includes(query) || art.subtitle.includes(query))
+        query = query.toLowerCase()
+        const arts = articles.filter(art =>
+            art.title.toLowerCase().includes(query) ||
+            art.content.toLowerCase().includes(query) ||
+            art.subtitle.toLowerCase().includes(query))
         this._articles$.next(arts as NewsArticle[])
     }
 
