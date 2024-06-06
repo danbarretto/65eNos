@@ -54,7 +54,7 @@ export class NewsService {
     filterByCategory(category: Category) {
         this.currentCat = category
         this.usedArticles = articles.filter(art => art.category === category) as NewsArticle[]
-        if (this.query !== '') {
+        if (this.query && this.query !== '') {
             this.searchArticle(this.query)
             return
         }

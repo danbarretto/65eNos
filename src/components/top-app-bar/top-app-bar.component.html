@@ -16,11 +16,8 @@
 			<mat-icon>help</mat-icon>
 		</button>
 
-		<button mat-icon-button class="example-icon" title="Acessibilidade">
-			<mat-icon>settings_accessibility</mat-icon>
-		</button>
 
-		<button mat-icon-button class="example-icon" title="Contraste" (click)="toggleContrast()">
+		<button mat-icon-button class="example-icon" [title]="tooltip" (click)="toggleContrast()">
 			<mat-icon>contrast</mat-icon>
 		</button>
 		
