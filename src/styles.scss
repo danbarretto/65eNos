@@ -18,6 +18,9 @@ body {
 
 body.dark-theme {
     @include mat.all-component-colors($dark-theme);
+    a{
+        color: white;
+    }
 }
 
 
