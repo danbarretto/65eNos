@@ -8,12 +8,20 @@ import { GridOfNewsComponent } from '../../components/grid-of-news/grid-of-news.
 import { FilterChipsComponent } from '../../components/filter-chips/filter-chips.component';
 import { Observable } from 'rxjs';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
+import { ScrollTopButtonComponent } from '../../components/scroll-top-button/scroll-top-button.component';
 
 @Component({
   selector: 'home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [MaterialModule, TopAppBarComponent, FooterComponent, GridOfNewsComponent, FilterChipsComponent, SearchBarComponent],
+  imports: [
+    MaterialModule,
+    TopAppBarComponent,
+    FooterComponent,
+    GridOfNewsComponent,
+    FilterChipsComponent,
+    SearchBarComponent,
+    ScrollTopButtonComponent],
   standalone: true
 })
 export class HomeComponent implements OnInit {

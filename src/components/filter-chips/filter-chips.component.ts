@@ -23,7 +23,7 @@ export class FilterChipsComponent implements OnInit {
 
   filterByCategory(category: Category) {
     if (this.currentCat === category) {
-      this.newsService.resetArticles()
+      this.newsService.clearCategory()
       this.currentCat = undefined
       this.newsService.getSortedByPublicationDate()
       return
