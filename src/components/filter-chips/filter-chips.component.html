@@ -1,0 +1,12 @@
+<mat-chip-set>
+  @for(cat of categories; track cat){
+    <mat-chip color="accent" highlighted (click)="filterByCategory(cat)">
+      {{cat | titlecase}}
+      @if(currentCat === cat){
+        <button (click)="filterByCategory(cat)" matChipRemove [attr.aria-label]="'remove ' + cat">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      }
+    </mat-chip>
+  }
+</mat-chip-set>
