@@ -28,7 +28,7 @@ export class LoginComponent {
   }
 
   createAccount() {
-    this.router.navigateByUrl('account/create', { skipLocationChange: true })
+    this.router.navigateByUrl('account/create')
   }
 
   login() {

@@ -95,7 +95,7 @@ export class AuthenticationService {
 
   login(email: string, password: string): boolean {
     if (this.currentUser !== undefined) {
-      this.router.navigateByUrl('/', { skipLocationChange: true });
+      this.router.navigateByUrl('/');
       console.log('logging in as: %s', this.currentUser.getFullName());
       return true;
     }
@@ -103,7 +103,7 @@ export class AuthenticationService {
     this.currentUser = this.validAccounts.find(user => user.email === email && user.password === password);
 
     if (this.currentUser !== undefined) {
-      this.router.navigateByUrl('/', { skipLocationChange: true });
+      this.router.navigateByUrl('/');
       console.log('logging in as: %s', this.currentUser.getFullName());
     }
 

@@ -1,0 +1,9 @@
+<div class="container">
+
+  <mat-form-field appearance="outline">
+    
+    <mat-label>Digite aqui o que deseja buscar</mat-label>
+    <input matInput [(ngModel)]="searchQuery" (input)="search()"/>
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+</div>

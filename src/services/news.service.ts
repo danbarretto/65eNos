@@ -44,4 +44,13 @@ export class NewsService {
         this._articles$.next(sortedArticles);
     }
 
+    searchArticle(query: string) {
+        if (query === '') {
+            this.resetArticles()
+            return
+        }
+        const arts = articles.filter(art => art.title.includes(query) || art.content.includes(query) || art.subtitle.includes(query))
+        this._articles$.next(arts as NewsArticle[])
+    }
+
 }
