@@ -54,7 +54,7 @@ export class CommentSectionComponent implements OnInit {
     this.comments.unshift({
       comment: this.comment,
       id: crypto.randomUUID(),
-      userName: this.currentUser.getFullName(),
+      userName: this.currentUser?.getFullName() ?? 'User',
       date: dateStr
     })
     this.comment = ''

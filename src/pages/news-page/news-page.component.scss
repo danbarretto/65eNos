@@ -1,5 +1,6 @@
 .container {
     width: 100%;
+    min-height: 100%;
     display: flex;
     justify-content: center;
 
@@ -12,7 +13,7 @@
 
         width: 60%;
 
-        h1{
+        h1 {
             margin: 0;
         }
 
@@ -20,7 +21,7 @@
             width: 100%;
         }
 
-        comment-section{
+        comment-section {
             width: 100%;
         }
     }
@@ -28,8 +29,8 @@
 
 .fab-container {
     bottom: 2em;
-    right: 2em;
-    position: sticky;
+    right: 0.5em;
+    position: fixed;
     display: flex;
     align-items: flex-end;
     flex-direction: column;
@@ -41,22 +42,34 @@
     padding-left: 2em;
 }
 
-.mat-success{
+.mat-success {
     background-color: #E4EAE4;
     color: #1A6B52;
 }
 
 @media only screen and (max-width: 768px) {
-    .container{
+    .container {
+
         // padding-left: 1em;
         // padding-right: 1em;
-        article{
+        article {
             width: 100%;
+
             // padding: 1em;
-            img{
+            img {
                 width: 100%;
             }
         }
 
+    }
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+
+    main {
+        flex: 1;
     }
 }
