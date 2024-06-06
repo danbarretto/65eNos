@@ -11,10 +11,14 @@
       src="https://material.angular.io/assets/img/examples/shiba1.jpg">
     <mat-form-field class="full-width">
       <mat-label>Comentário</mat-label>
-      <input [(ngModel)]="comment" matInput>
+      <input [formControl]="commentFormControl" [(ngModel)]="comment" matInput>
+      @if(commentFormControl.hasError('invalid')){
+        <mat-error>Você precisa fazer login para comentar</mat-error>
+      }
     </mat-form-field>
+
   </div>
-  @if(comment !== ''){
+  @if(comment !== '' && currentUser){
     <div class="button-container">
       <button (click)="comment = ''" mat-button aria-label="Botão para cancelar a adição de novo comentário">Cancelar</button>
       <button (click)="addComent()" aria-label="Botão de confirmar novo comentário" mat-flat-button>Confirmar</button>
