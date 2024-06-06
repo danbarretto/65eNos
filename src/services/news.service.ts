@@ -8,6 +8,7 @@ export type NewsArticle = {
     subtitle: string,
     imagePath: string,
     audioPath: string,
+    summary: string,
     content: string,
     commentTopic: string,
     imageAlt: string,

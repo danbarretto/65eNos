@@ -31,6 +31,7 @@
 
   .subtitle {
     font-weight: normal;
+    font-style: italic;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
@@ -41,7 +42,7 @@
   .summary {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 4;
     overflow: hidden;
     white-space: pre-wrap;
     

@@ -11,7 +11,7 @@
     </mat-card-header>
     <mat-card-content class = "summary"> 
       <p class = "summary">
-        {{news.content}}
+        {{news.summary}}
       </p>
     </mat-card-content>
   </div>
@@ -26,8 +26,8 @@
       }
       @case(State.Play){ 
         <audio controls aria-label="Controles de áudio para o artigo">
-          <source src="../../assets/audio/teste.mp3" type="audio/mpeg">
-          <source src="../../assets/audio/teste.ogg" type="audio/ogg">
+          <!-- <source src="../../assets/audio/teste.mp3" type="audio/mpeg"> -->
+          <source src={{news.audioPath}} type="audio/ogg">
           Seu navegador não consegue reproduzir esse tipo de áudio.
         </audio>
       }
