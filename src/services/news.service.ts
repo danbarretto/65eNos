@@ -24,24 +24,25 @@ export class NewsService {
 
     usedArticles: NewsArticle[] = articles as NewsArticle[]
     private _articles$ = new BehaviorSubject<NewsArticle[]>(articles as NewsArticle[])
+    query: string;
     get articles$() {
         return this._articles$.asObservable()
     }
-    
+
     currentCat: Category;
 
     getNewsArticle(id: string): NewsArticle {
         return articles.find(art => art.id === id) as NewsArticle
     }
 
-    clearCategory(){
-        this.onCategoryCleared.emit()
+    clearCategory() {
         this.currentCat = undefined
         this.resetArticles()
+        this.onCategoryCleared.emit()
     }
 
     resetArticles() {
-        if(this.currentCat){
+        if (this.currentCat) {
             this.filterByCategory(this.currentCat)
             return
         }
@@ -52,6 +53,10 @@ export class NewsService {
     filterByCategory(category: Category) {
         this.currentCat = category
         this.usedArticles = articles.filter(art => art.category === category) as NewsArticle[]
+        if (this.query !== '') {
+            this.searchArticle(this.query)
+            return
+        }
         this._articles$.next(this.usedArticles)
     }
 
@@ -63,6 +68,7 @@ export class NewsService {
     }
 
     searchArticle(query: string) {
+        this.query = query
         if (query === '') {
             this.resetArticles()
             return

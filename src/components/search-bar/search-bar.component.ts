@@ -18,7 +18,7 @@ export class SearchBarComponent implements OnInit {
 
   ngOnInit() {
     this.newsService.onCategoryCleared.subscribe(()=>{
-      this.searchQuery = ''
+      this.search()
     })
   }
 

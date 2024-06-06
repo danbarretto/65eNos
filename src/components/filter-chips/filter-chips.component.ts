@@ -25,12 +25,12 @@ export class FilterChipsComponent implements OnInit {
     if (this.currentCat === category) {
       this.newsService.clearCategory()
       this.currentCat = undefined
-      this.newsService.getSortedByPublicationDate()
+      // this.newsService.getSortedByPublicationDate()
       return
     }
     this.currentCat = category
     this.newsService.filterByCategory(category)    
-    this.newsService.getSortedByPublicationDate()
+    // this.newsService.getSortedByPublicationDate()
   }
 
 }
