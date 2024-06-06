@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MaterialModule } from '../../app/material.module';
 import { FormsModule } from '@angular/forms';
+import { AuthenticationService, UserModel } from '../../services/authentication.service';
 
 export type Comment = {
   userName: string,
@@ -16,9 +17,11 @@ export type Comment = {
   imports: [MaterialModule, FormsModule],
   standalone: true
 })
-export class CommentSectionComponent {
+export class CommentSectionComponent implements OnInit {
 
   @Input() commentTopic: string
+
+  currentUser: UserModel
 
   comments: Comment[] = [
     {
@@ -37,17 +40,21 @@ export class CommentSectionComponent {
 
   comment: string = ''
 
-  constructor() { }
+  constructor(private authService: AuthenticationService) { }
 
+
+  ngOnInit() {
+    this.currentUser = this.authService.getCurrentUser()
+  }
 
   addComent() {
     const date = new Date()
-    const dateStr = `${date.getDate()}/${String(date.getMonth()+1).padStart(2, '0')}/${date.getFullYear()}`
+    const dateStr = `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`
 
     this.comments.unshift({
       comment: this.comment,
       id: crypto.randomUUID(),
-      userName: 'USER NAME',
+      userName: this.currentUser.getFullName(),
       date: dateStr
     })
     this.comment = ''

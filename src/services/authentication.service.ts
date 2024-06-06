@@ -51,8 +51,7 @@ export class CustomValidators {
   }
 }
 
-export class UserModel
-{
+export class UserModel {
   name: string;
   lastName: string;
   email: string;
@@ -63,9 +62,9 @@ export class UserModel
   }
 
   isValid(): boolean {
-    return this.name.length > 0 && 
-      this.lastName.length > 0 && 
-      this.email.length > 0 && 
+    return this.name.length > 0 &&
+      this.lastName.length > 0 &&
+      this.email.length > 0 &&
       this.password.length > 0;
   }
 }
@@ -76,38 +75,42 @@ export class UserModel
 export class AuthenticationService {
 
   validAccounts: UserModel[] = [];
-  
+
   private currentUser: UserModel | undefined;
 
   constructor(private router: Router) {
-    
+
   }
 
-  createAccount(user: UserModel): void {    
+  createAccount(user: UserModel): void {
     if (!user.isValid()) {
       return;
     }
-    
+
     console.log('created account:', user.getFullName())
-    
+
     this.validAccounts.push(user);
     this.login(user.email, user.password);
   }
 
   login(email: string, password: string): boolean {
     if (this.currentUser !== undefined) {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/', { skipLocationChange: true });
       console.log('logging in as: %s', this.currentUser.getFullName());
       return true;
     }
 
     this.currentUser = this.validAccounts.find(user => user.email === email && user.password === password);
-    
+
     if (this.currentUser !== undefined) {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/', { skipLocationChange: true });
       console.log('logging in as: %s', this.currentUser.getFullName());
     }
-    
+
     return !!this.currentUser;
+  }
+
+  getCurrentUser() {
+    return this.currentUser
   }
 }

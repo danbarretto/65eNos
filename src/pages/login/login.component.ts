@@ -20,7 +20,7 @@ export class LoginComponent {
   showPassword = false
 
   constructor(private router: Router, private authService: AuthenticationService) {
-    
+
   }
 
   togglePassword() {
@@ -28,7 +28,7 @@ export class LoginComponent {
   }
 
   createAccount() {
-    this.router.navigateByUrl('account/create')
+    this.router.navigateByUrl('account/create', { skipLocationChange: true })
   }
 
   login() {

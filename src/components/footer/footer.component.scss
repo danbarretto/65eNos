@@ -1,7 +1,9 @@
 footer{
     width: 100%;
     color: white;
-
+    overflow-x: hidden;
+    position: sticky;
+    bottom: 0;
 }
 
 .footer_content{

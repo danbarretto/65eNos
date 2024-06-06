@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
 
 
   goToArticle(article: NewsArticle) {
-    this.router.navigateByUrl(`noticias/${article.id}`)
+    this.router.navigateByUrl(`noticias/${article.id}`, { skipLocationChange: true })
   }
 
 

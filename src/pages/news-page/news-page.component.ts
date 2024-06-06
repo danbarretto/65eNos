@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MaterialModule } from '../../app/material.module';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NewsArticle, NewsService } from '../../services/news.service';
 import { TopAppBarComponent } from '../../components/top-app-bar/top-app-bar.component';
 import { FooterComponent } from '../../components/footer/footer.component';
@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AudioState } from '../../components/card-news/card-news.component';
 import { CommentSectionComponent } from '../../components/comment-section/comment-section.component';
 import { FontSizeService } from '../../services/font-size.service';
+import { AuthenticationService, UserModel } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-news-page',
@@ -24,9 +25,12 @@ export class NewsPageComponent implements OnInit {
   article: NewsArticle
   audioState: AudioState = AudioState.Initial
   State = AudioState
+  currentUser: UserModel
+
 
   constructor(private route: ActivatedRoute, private newsService: NewsService,
-    private fontSizeService: FontSizeService
+    private fontSizeService: FontSizeService, private authService: AuthenticationService,
+    private router: Router
   ) {
   }
 
@@ -35,5 +39,9 @@ export class NewsPageComponent implements OnInit {
     this.article = this.newsService.getNewsArticle(this.id)
   }
 
+
+  navigateHome() {
+    this.router.navigateByUrl('', { skipLocationChange: true })
+  }
 
 }
