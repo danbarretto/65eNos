@@ -33,7 +33,9 @@ export class CardNewsComponent implements OnInit {
   ngOnInit() {
   }
 
-  toggleAudioState() {
+  toggleAudioState(event:MouseEvent) {
+    event.stopPropagation()
+    event.preventDefault()
     if (this.audioState === AudioState.Initial || this.audioState === AudioState.Pause) {
       this.audioState = AudioState.Play;
     } else {
