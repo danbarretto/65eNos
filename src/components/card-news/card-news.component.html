@@ -16,7 +16,7 @@
     </mat-card-content>
   </div>
   <mat-card-actions class="buttons">
-    <button mat-stroked-button (click)="openArticle()">Ler mais</button>
+    <button mat-stroked-button aria-label="Abrir página da notícia" (click)="openArticle()">Ler mais</button>
     @switch (audioState) {
       @case(State.Initial) {
       <button mat-flat-button extended class="sound_card_button" (click)="toggleAudioState($event)" aria-label="Ouvir a descrição do artigo">
@@ -25,7 +25,7 @@
       </button>
       }
       @case(State.Play){ 
-        <audio controls aria-label="Controles de áudio para o artigo">
+        <audio controls (click)="$event.stopPropagation()" aria-label="Controles de áudio para o artigo">
           <!-- <source src="../../assets/audio/teste.mp3" type="audio/mpeg"> -->
           <source src={{news.audioPath}} type="audio/ogg">
           Seu navegador não consegue reproduzir esse tipo de áudio.
