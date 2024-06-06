@@ -15,6 +15,8 @@ export class ScrollTopButtonComponent {
 
   scrollToTop() {
     this.scroll.scrollToPosition([0, 0])
+    document.body.scrollTop = 0;
+
   }
 
 }
