@@ -19,16 +19,16 @@
     <button mat-stroked-button (click)="openArticle()">Ler mais</button>
     @switch (audioState) {
       @case(State.Initial) {
-      <button mat-flat-button extended class="sound_card_button" (click)="toggleAudioState()">
+      <button mat-flat-button extended class="sound_card_button" (click)="toggleAudioState()" aria-label="Ouvir a descrição do artigo">
         <mat-icon>volume_up</mat-icon>
         Ouvir
       </button>
       }
       @case(State.Play){ 
-        <audio controls>
+        <audio controls aria-label="Controles de áudio para o artigo">
           <source src="../../assets/audio/teste.mp3" type="audio/mpeg">
           <source src="../../assets/audio/teste.ogg" type="audio/ogg">
-          Your browser does not support the audio element.
+          Seu navegador não consegue reproduzir esse tipo de áudio.
         </audio>
       }
     }
