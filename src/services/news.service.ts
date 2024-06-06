@@ -61,10 +61,21 @@ export class NewsService {
         this._articles$.next(this.usedArticles)
     }
 
-    getSortedByPublicationDate(): void {
-        const sortedArticles = this.usedArticles.sort((a, b) => {
-            return new Date(b.publicationDate).getTime() - new Date(a.publicationDate).getTime();
-        });
+    getSortedByPublicationDate(sortBy: 'asc' | 'desc') {
+        let sortedArticles
+        switch (sortBy) {
+            case 'desc':
+                sortedArticles = this.usedArticles.sort((a, b) => {
+                    return new Date(b.publicationDate).getTime() - new Date(a.publicationDate).getTime();
+                });
+                break
+            case 'asc':
+                sortedArticles = this.usedArticles.sort((a, b) => {
+                    return new Date(a.publicationDate).getTime() - new Date(b.publicationDate).getTime();
+                });
+                break
+        }
+
         this._articles$.next(sortedArticles);
     }
 

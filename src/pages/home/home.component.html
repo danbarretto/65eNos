@@ -1,7 +1,25 @@
 <div class="container">
     <header>
         <top-app-bar></top-app-bar>
-        <filter-chips></filter-chips>
+        <div class="chip-container">
+            <filter-chips></filter-chips>
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-disabled="Botão para abrir menu de ordenação">
+                <mat-icon>filter_list</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <span style="padding-left: 0.5em;">
+                    Ordernar por
+                </span>
+                <button aria-label="Botão de ordenação por mais recente" mat-menu-item
+                    (click)="newsService.getSortedByPublicationDate('desc')">
+                    <span>Mais Recente</span>
+                </button>
+                <button aria-label="Botão de ordenação por mais antigo" mat-menu-item
+                    (click)="newsService.getSortedByPublicationDate('asc')">
+                    <span>Mais Antigo</span>
+                </button>
+            </mat-menu>
+        </div>
         <search-bar></search-bar>
     </header>
     <main>
@@ -9,5 +27,5 @@
     </main>
     <scroll-top-button></scroll-top-button>
     <app-footer></app-footer>
-    
+
 </div>

@@ -26,11 +26,12 @@ export class CardNewsComponent implements OnInit {
 
   State = AudioState
   audioState: AudioState = AudioState.Initial;
-
+  date = ''
 
   constructor(private router: Router) { }
 
   ngOnInit() {
+    this.date = new Date(this.news.publicationDate).toLocaleDateString('pt-BR')
   }
 
   toggleAudioState(event:MouseEvent) {

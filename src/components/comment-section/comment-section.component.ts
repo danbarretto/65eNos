@@ -50,7 +50,7 @@ export class CommentSectionComponent implements OnInit {
 
   addComent() {
     const date = new Date()
-    const dateStr = `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`
+    const dateStr = date.toLocaleDateString('pt-BR')
 
     this.comments.unshift({
       comment: this.comment,
