@@ -7,7 +7,7 @@ footer{
 }
 
 .footer_content{
-    background-color: rgb(70, 67, 67);
+    background-color: #1a1c18;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
@@ -35,7 +35,7 @@ footer{
     border-radius: 50%;
     text-decoration: none;
     transition: all 0.4s;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
 }
 .footer_link{
     color: white;
@@ -89,12 +89,17 @@ footer{
     display: flex;
     justify-content: center;
     width: 100%;
-    padding: 0.5rem;
+    padding-top: 0.8rem;
 }
 
 @media screen and (max-width: 426px){
     .footer_content{
-        grid-template-columns: repeat(1,1fr);
-        gap: 3rem;
+        grid-template-columns: repeat(1,2fr);
+        gap: 2rem;
+    }
+    .footer_content{
+        gap: 0.5rem;
+        padding: 1rem 1.5rem;
+    
     }
 }
