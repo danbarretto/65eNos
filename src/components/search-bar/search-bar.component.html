@@ -1,9 +1,15 @@
 <div class="container">
 
   <mat-form-field appearance="fill">
-    
+
     <mat-label>Digite aqui para buscar</mat-label>
-    <input matInput [(ngModel)]="searchQuery" (input)="search()"/>
-    <mat-icon matSuffix>search</mat-icon>
+    <input matInput [(ngModel)]="searchQuery" (input)="search()" />
+    @if(!searchQuery || searchQuery === '' ){
+      <mat-icon matSuffix>search</mat-icon>
+    }@else {
+      <button matSuffix mat-icon-button aria-label="Limpar busca" (click)="clearSearch()">
+        <mat-icon>close</mat-icon>
+      </button>
+    }
   </mat-form-field>
 </div>

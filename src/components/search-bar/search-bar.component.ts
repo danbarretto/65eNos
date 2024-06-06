@@ -26,4 +26,8 @@ export class SearchBarComponent implements OnInit {
     this.newsService.searchArticle(this.searchQuery)
   }
 
+  clearSearch(){
+    this.searchQuery = ''
+    this.search()
+  }
 }
