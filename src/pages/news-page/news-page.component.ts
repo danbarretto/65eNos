@@ -41,7 +41,7 @@ export class NewsPageComponent implements OnInit {
 
 
   navigateHome() {
-    this.router.navigateByUrl('', { skipLocationChange: true })
+    this.router.navigateByUrl('')
   }
 
 }

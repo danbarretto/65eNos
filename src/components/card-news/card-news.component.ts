@@ -42,7 +42,7 @@ export class CardNewsComponent implements OnInit {
   }
 
   openArticle() {
-    this.router.navigateByUrl(`noticias/${this.news.id}`, { skipLocationChange: true })
+    this.router.navigateByUrl(`noticias/${this.news.id}`)
   }
 
 }
