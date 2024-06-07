@@ -4,7 +4,7 @@
 
 <main class="main-container">
   <section class="inputs">
-    <form [formGroup]="createAccountForm">
+    <form [formGroup]="createAccountForm" (keydown.enter)="createAccount()">
       <mat-form-field class="example-form-field">
         <mat-label>Nome</mat-label>
         <input matInput type="name" formControlName="name">
