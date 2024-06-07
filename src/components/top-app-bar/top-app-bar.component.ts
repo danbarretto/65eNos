@@ -45,6 +45,10 @@ export class TopAppBarComponent {
 
   }
 
+  openHelp(){
+    this.router.navigateByUrl('noticias/1')
+  }
+
 
   increaseFontSize() {
     this.fontSizeService.increaseFontSize();
