@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FontSizeService } from '../../services/font-size.service';
 import { ToggleMenuService } from '../../services/toggle-menu.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'top-app-bar',
   standalone: true,
@@ -14,17 +15,18 @@ import { ToggleMenuService } from '../../services/toggle-menu.service';
 export class TopAppBarComponent {
 
   currentTheme = 'light-theme';
+  tooltip = 'Aplicar Tema Escuro'
 
-  constructor(private renderer: Renderer2, private fontSizeService: FontSizeService, private toggleService: ToggleMenuService) {
+  constructor(private renderer: Renderer2, private fontSizeService: FontSizeService, private toggleService: ToggleMenuService, private router: Router) {
   }
-
-
-
+  
   toggleContrast() {
     if (this.currentTheme === 'light-theme') {
       this.currentTheme = 'dark-theme';
+      this.tooltip = 'Aplicar Tema Claro'
     } else {
       this.currentTheme = 'light-theme';
+      this.tooltip = 'Aplicar Tema Escuro'
     }
     this.applyTheme(this.currentTheme);
   }
@@ -45,9 +47,16 @@ export class TopAppBarComponent {
     this.toggleService.toggleMenu()
   }
 
+  openHelp(){
+    this.router.navigateByUrl('noticias/1')
+  }
+
   increaseFontSize() {
     this.fontSizeService.increaseFontSize();
+  }
 
+  goHome() {
+    this.router.navigateByUrl('/')
   }
 
 }

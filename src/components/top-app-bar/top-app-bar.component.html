@@ -5,21 +5,19 @@
 			<mat-icon>menu</mat-icon>
 		</button>
 		
-		<a href="/" class="home-link" aria-label="Volta para Página Inicial">
+		<div (click)="goHome()" class="home-link" aria-label="Volta para Página Inicial">65 e Nós</div>
+		<!-- <a href="/" class="home-link" >
 			65 e Nós
-		</a>
+		</a> -->
 	</div>
 
 	<div class="accessibility-icons">
-		<button mat-icon-button class="example-icon" title="Ajuda">
+		<button (click)="openHelp()" mat-icon-button class="example-icon" title="Ajuda">
 			<mat-icon>help</mat-icon>
 		</button>
 
-		<button mat-icon-button class="example-icon" title="Acessibilidade">
-			<mat-icon>settings_accessibility</mat-icon>
-		</button>
 
-		<button mat-icon-button class="example-icon" title="Contraste" (click)="toggleContrast()">
+		<button mat-icon-button class="example-icon" [title]="tooltip" (click)="toggleContrast()">
 			<mat-icon>contrast</mat-icon>
 		</button>
 		

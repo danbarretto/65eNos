@@ -13,6 +13,7 @@ import { AuthenticationService, UserModel } from '../../services/authentication.
 import { OverlayMenuComponent } from "../../components/overlay-menu/overlay-menu.component";
 import { ToggleMenuService } from '../../services/toggle-menu.service';
 import { MatSidenav } from '@angular/material/sidenav';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
     selector: 'app-news-page',
@@ -34,7 +35,7 @@ export class NewsPageComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private newsService: NewsService,
     private fontSizeService: FontSizeService, private authService: AuthenticationService,
-    private router: Router, private toggleMenu: ToggleMenuService
+    private router: Router, private toggleMenu: ToggleMenuService, private scroll: ViewportScroller
   ) {
     this.toggleMenu.toggle$.subscribe(() => {
       this.sidenav.toggle()
@@ -42,6 +43,8 @@ export class NewsPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    document.body.scrollTop = 0;
+    this.scroll.scrollToPosition([0,0])
     this.id = this.route.snapshot.paramMap.get('id')
     this.article = this.newsService.getNewsArticle(this.id)
   }

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MaterialModule } from '../../app/material.module';
-import { FormsModule } from '@angular/forms';
-import { AuthenticationService, UserModel } from '../../services/authentication.service';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthenticationService, CustomValidators, UserModel } from '../../services/authentication.service';
 
 export type Comment = {
   userName: string,
@@ -14,12 +14,13 @@ export type Comment = {
   selector: 'comment-section',
   templateUrl: './comment-section.component.html',
   styleUrls: ['./comment-section.component.scss'],
-  imports: [MaterialModule, FormsModule],
+  imports: [MaterialModule, FormsModule, ReactiveFormsModule],
   standalone: true
 })
 export class CommentSectionComponent implements OnInit {
 
   @Input() commentTopic: string
+  commentFormControl = new FormControl('', [() => !this.currentUser ? { 'invalid': true } : null])
 
   currentUser: UserModel
 
@@ -49,7 +50,7 @@ export class CommentSectionComponent implements OnInit {
 
   addComent() {
     const date = new Date()
-    const dateStr = `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`
+    const dateStr = date.toLocaleDateString('pt-BR')
 
     this.comments.unshift({
       comment: this.comment,

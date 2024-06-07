@@ -17,10 +17,17 @@ export class SearchBarComponent implements OnInit {
   constructor(private newsService: NewsService) { }
 
   ngOnInit() {
+    this.newsService.onCategoryCleared.subscribe(()=>{
+      this.search()
+    })
   }
 
   search() {
     this.newsService.searchArticle(this.searchQuery)
   }
 
+  clearSearch(){
+    this.searchQuery = ''
+    this.search()
+  }
 }

@@ -15,22 +15,20 @@ export class FilterChipsComponent implements OnInit {
   categories: Category[] = ['bem-estar', 'saúde', 'social', 'dicas']
   currentCat: Category
   constructor(private newsService: NewsService) {
-    this.newsService.getSortedByPublicationDate()
-      }
+    // this.newsService.getSortedByPublicationDate()
+  }
 
   ngOnInit() {
   }
 
   filterByCategory(category: Category) {
     if (this.currentCat === category) {
-      this.newsService.resetArticles()
+      this.newsService.clearCategory()
       this.currentCat = undefined
-      this.newsService.getSortedByPublicationDate()
       return
     }
     this.currentCat = category
-    this.newsService.filterByCategory(category)    
-    this.newsService.getSortedByPublicationDate()
+    this.newsService.filterByCategory(category)
   }
 
 }

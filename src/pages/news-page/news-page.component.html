@@ -2,11 +2,11 @@
   <mat-sidenav #sidenav mode="over">
     <overlay-menu></overlay-menu>
   </mat-sidenav>
-  <mat-sidenav-content>  
+  <mat-sidenav-content>
     <div class="mainContainer">
       <header>
         <top-app-bar></top-app-bar>
-        <mat-label class="breadcrumb"><a href="/">Home</a> > {{article.title}}</mat-label>
+        <mat-label class="breadcrumb"><a href="/65eNos">Home</a> > {{article.title}}</mat-label>
       </header>
       <main class="container">
         <article>
@@ -24,8 +24,7 @@
           }@else {
           <audio (pause)="audioState = State.Pause" aria-label="audio descrição da notícia" (play)="audioState = State.Play"
             controls>
-            <source src="../../assets/audio/teste.mp3" type="audio/mpeg">
-            <source src="../../assets/audio/teste.ogg" type="audio/ogg">
+            <source src={{article.audioContentPath}} type="audio/ogg">
             Your browser does not support the audio element.
           </audio>
           }
