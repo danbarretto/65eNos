@@ -7,7 +7,7 @@
     alt="Logo do 65eNos, possui um desenho cartoonizado de um idoso com as palavras 65 e Nós ao redor dele em formato circular na cor verde escuro" />
 
   <section class="inputs">
-    <form (ngSubmit)="login()">
+    <form (ngSubmit)="login()" (keydown.enter)="login()">
 
       @if (errorMessage) {
         <mat-error> {{errorMessage}} </mat-error>
