@@ -22,11 +22,11 @@ export class OverlayMenuComponent implements OnInit, OnDestroy {
   currentUser: UserModel
   userFullName = 'Usuário'
 
-  topics: string[] = ["Bem-estar", "Saúde", "Social", "Dicas"]
+  topics: string[] = ["Bem-estar", "Saúde", "Social", "Alimentação"]
   links: MenuLink[] = [
-    { label: "Sobre nós", icon: "information", route: "about" },
-    { label: "Contato", icon: "contact_page", route: "contact" },
-    { label: "Ajuda", icon: "help", route: "help" },
+    { label: "Sobre nós", icon: "information", route: "" },
+    { label: "Contato", icon: "contact_page", route: "" },
+    { label: "Ajuda", icon: "help", route: "noticias/1" },
   ]
   userSub: Subscription;
 
@@ -55,5 +55,11 @@ export class OverlayMenuComponent implements OnInit, OnDestroy {
 
   logOut(): void {
     this.authService.logOut();
+  }
+
+  navigateTo(path: string): void {
+    if (path){
+      this.router.navigateByUrl(path);
+    }
   }
 }

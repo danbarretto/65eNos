@@ -37,7 +37,7 @@
 
   <div>
     @for (menuLink of links; track $index) {
-      <button class="link-button" [ariaLabel]="'Botão de + {{label}}'" mat-button>
+      <button class="link-button" [ariaLabel]="'Botão de + {{label}}'" (click)="navigateTo(menuLink.route)" mat-button>
         <mat-icon>{{menuLink.icon}}</mat-icon>
         {{menuLink.label}}
       </button>
