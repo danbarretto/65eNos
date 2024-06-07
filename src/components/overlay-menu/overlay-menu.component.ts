@@ -3,6 +3,7 @@ import { MaterialModule } from '../../app/material.module';
 import { AuthenticationService, UserModel } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs'
+import { ToggleMenuService } from '../../services/toggle-menu.service';
 
 interface MenuLink {
   label: string;
@@ -30,8 +31,12 @@ export class OverlayMenuComponent implements OnInit, OnDestroy {
   ]
   userSub: Subscription;
 
-  constructor(private authService: AuthenticationService, private router: Router) {
+  constructor(private authService: AuthenticationService, private router: Router, private toggleMenu: ToggleMenuService) {
 
+  }
+
+  close(){
+    this.toggleMenu.toggleMenu()
   }
 
   ngOnInit(): void {

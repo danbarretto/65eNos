@@ -1,8 +1,9 @@
-import { Component, Renderer2} from '@angular/core';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { Component, Renderer2 } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { FontSizeService } from '../../services/font-size.service';
+import { ToggleMenuService } from '../../services/toggle-menu.service';
 @Component({
   selector: 'top-app-bar',
   standalone: true,
@@ -14,10 +15,10 @@ export class TopAppBarComponent {
 
   currentTheme = 'light-theme';
 
-  constructor(private renderer: Renderer2, private fontSizeService: FontSizeService) {
+  constructor(private renderer: Renderer2, private fontSizeService: FontSizeService, private toggleService: ToggleMenuService) {
   }
 
-  
+
 
   toggleContrast() {
     if (this.currentTheme === 'light-theme') {
@@ -34,13 +35,17 @@ export class TopAppBarComponent {
     this.renderer.addClass(document.body, theme);
   }
 
-  decreaseFontSize(){
+  decreaseFontSize() {
     this.fontSizeService.decreaseFontSize();
 
   }
-  
-  
-  increaseFontSize(){
+
+
+  toggleMenu() {
+    this.toggleService.toggleMenu()
+  }
+
+  increaseFontSize() {
     this.fontSizeService.increaseFontSize();
 
   }
