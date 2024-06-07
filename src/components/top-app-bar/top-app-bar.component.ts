@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class TopAppBarComponent {
 
   currentTheme = 'light-theme';
+  tooltip = 'Aplicar Tema Escuro'
 
   constructor(private renderer: Renderer2, private fontSizeService: FontSizeService,
     private router: Router
@@ -21,12 +22,14 @@ export class TopAppBarComponent {
   }
 
 
-
+  
   toggleContrast() {
     if (this.currentTheme === 'light-theme') {
       this.currentTheme = 'dark-theme';
+      this.tooltip = 'Aplicar Tema Claro'
     } else {
       this.currentTheme = 'light-theme';
+      this.tooltip = 'Aplicar Tema Escuro'
     }
     this.applyTheme(this.currentTheme);
   }

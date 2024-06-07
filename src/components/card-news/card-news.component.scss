@@ -1,6 +1,7 @@
 .card-news {
     // min-width: 10em;
     display: flex;
+    cursor: pointer;
     max-width: 30em;
     // background-color: white;
   }
@@ -57,4 +58,8 @@
 
   .buttons * {
     margin: 0.2em;
+  }
+
+  .date{
+    font-size: 0.7em;
   }

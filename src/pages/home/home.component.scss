@@ -13,9 +13,14 @@
         gap: 0.5em;
     }
 
+    .chip-container {
+        display: flex;
+        gap: 1em;
+    }
+
 }
 
-scroll-top-button{
+scroll-top-button {
     position: fixed;
     bottom: 2em;
     right: 0.5em;

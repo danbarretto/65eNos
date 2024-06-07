@@ -30,11 +30,13 @@ export class NewsPageComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private newsService: NewsService,
     private fontSizeService: FontSizeService, private authService: AuthenticationService,
-    private router: Router
+    private router: Router, private scroll: ViewportScroller
   ) {
   }
 
   ngOnInit() {
+    document.body.scrollTop = 0;
+    this.scroll.scrollToPosition([0,0])
     this.id = this.route.snapshot.paramMap.get('id')
     this.article = this.newsService.getNewsArticle(this.id)
   }

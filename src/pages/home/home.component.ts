@@ -26,7 +26,7 @@ import { ScrollTopButtonComponent } from '../../components/scroll-top-button/scr
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router) {
+  constructor(private router: Router, public newsService:NewsService) {
 
   }
 

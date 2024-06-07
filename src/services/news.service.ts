@@ -55,17 +55,28 @@ export class NewsService {
     filterByCategory(category: Category) {
         this.currentCat = category
         this.usedArticles = articles.filter(art => art.category === category) as NewsArticle[]
-        if (this.query !== '') {
+        if (this.query && this.query !== '') {
             this.searchArticle(this.query)
             return
         }
         this._articles$.next(this.usedArticles)
     }
 
-    getSortedByPublicationDate(): void {
-        const sortedArticles = this.usedArticles.sort((a, b) => {
-            return new Date(b.publicationDate).getTime() - new Date(a.publicationDate).getTime();
-        });
+    getSortedByPublicationDate(sortBy: 'asc' | 'desc') {
+        let sortedArticles
+        switch (sortBy) {
+            case 'desc':
+                sortedArticles = this.usedArticles.sort((a, b) => {
+                    return new Date(b.publicationDate).getTime() - new Date(a.publicationDate).getTime();
+                });
+                break
+            case 'asc':
+                sortedArticles = this.usedArticles.sort((a, b) => {
+                    return new Date(a.publicationDate).getTime() - new Date(b.publicationDate).getTime();
+                });
+                break
+        }
+
         this._articles$.next(sortedArticles);
     }
 
