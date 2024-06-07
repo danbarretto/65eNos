@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MaterialModule } from '../../app/material.module';
 import { AuthenticationService, UserModel } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs'
-import { MatDrawer, MatDrawerContent, MatSidenav } from '@angular/material/sidenav';
 import { ToggleMenuService } from '../../services/toggle-menu.service';
 
 interface MenuLink {
@@ -24,11 +23,11 @@ export class OverlayMenuComponent implements OnInit, OnDestroy {
   currentUser: UserModel
   userFullName = 'Usuário'
 
-  topics: string[] = ["Bem-estar", "Saúde", "Social", "Dicas"]
+  topics: string[] = ["Bem-estar", "Saúde", "Social", "Alimentação"]
   links: MenuLink[] = [
-    { label: "Sobre nós", icon: "information", route: "about" },
-    { label: "Contato", icon: "contact_page", route: "contact" },
-    { label: "Ajuda", icon: "help", route: "help" },
+    { label: "Sobre nós", icon: "information", route: "" },
+    { label: "Contato", icon: "contact_page", route: "" },
+    { label: "Ajuda", icon: "help", route: "noticias/1" },
   ]
   userSub: Subscription;
 
@@ -63,4 +62,9 @@ export class OverlayMenuComponent implements OnInit, OnDestroy {
     this.authService.logOut();
   }
 
+  navigateTo(path: string): void {
+    if (path){
+      this.router.navigateByUrl(path);
+    }
+  }
 }
