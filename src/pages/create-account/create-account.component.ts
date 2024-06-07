@@ -17,7 +17,7 @@ export class CustomErrorStateMatcher implements ErrorStateMatcher {
 export class ConfirmValidParentErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
-    return (control && control.invalid && (control.dirty || control.touched || isSubmitted)) || (control && control.parent && control.parent.invalid  && (control.parent.dirty || control.parent.touched || isSubmitted));
+    return (control && control.invalid && (control.dirty || control.touched || isSubmitted)) || (control && control.parent && control.parent.invalid && (control.parent.dirty || control.parent.touched || isSubmitted));
   }
 }
 
@@ -42,7 +42,7 @@ export class CreateAccountComponent {
   emailGroup: FormGroup;
   emailControl: FormControl;
   confirmEmailControl: FormControl;
-  
+
   passwordGroup: FormGroup;
   passwordControl: FormControl;
   confirmPasswordControl: FormControl;
@@ -85,13 +85,10 @@ export class CreateAccountComponent {
     if (this.createAccountForm.invalid) {
       return;
     }
-    
-    const user: UserModel = new UserModel;
-    user.name = this.nameControl.value;
-    user.lastName = this.lastNameControl.value;
-    user.email = this.emailControl.value;
-    user.password = this.passwordControl.value;
-    
+
+    const user: UserModel = new UserModel(this.nameControl.value, this.lastNameControl.value, this.emailControl.value, this.passwordControl.value);
+
+
     this.authService.createAccount(user);
   }
 

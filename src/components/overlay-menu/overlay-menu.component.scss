@@ -1,0 +1,36 @@
+.container{
+    padding-left: 1em;
+}
+
+.account-buttons {
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+
+    button {
+        width: 9em;
+    }
+}
+
+.menu-label {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.example-container {
+    width: 500px;
+    height: 300px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.example-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.example-sidenav {
+    padding: 20px;
+}

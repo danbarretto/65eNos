@@ -3,6 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FontSizeService } from '../../services/font-size.service';
+import { ToggleMenuService } from '../../services/toggle-menu.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'top-app-bar',
@@ -16,12 +17,8 @@ export class TopAppBarComponent {
   currentTheme = 'light-theme';
   tooltip = 'Aplicar Tema Escuro'
 
-  constructor(private renderer: Renderer2, private fontSizeService: FontSizeService,
-    private router: Router
-  ) {
+  constructor(private renderer: Renderer2, private fontSizeService: FontSizeService, private toggleService: ToggleMenuService, private router: Router) {
   }
-
-
   
   toggleContrast() {
     if (this.currentTheme === 'light-theme') {
@@ -45,14 +42,17 @@ export class TopAppBarComponent {
 
   }
 
+
+  toggleMenu() {
+    this.toggleService.toggleMenu()
+  }
+
   openHelp(){
     this.router.navigateByUrl('noticias/1')
   }
 
-
   increaseFontSize() {
     this.fontSizeService.increaseFontSize();
-
   }
 
   goHome() {
