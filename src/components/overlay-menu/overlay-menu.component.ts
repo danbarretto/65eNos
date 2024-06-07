@@ -1,8 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { MaterialModule } from '../../app/material.module';
 import { AuthenticationService, UserModel } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs'
+import { MatDrawer, MatDrawerContent, MatSidenav } from '@angular/material/sidenav';
+import { ToggleMenuService } from '../../services/toggle-menu.service';
 
 interface MenuLink {
   label: string;
@@ -30,8 +32,12 @@ export class OverlayMenuComponent implements OnInit, OnDestroy {
   ]
   userSub: Subscription;
 
-  constructor(private authService: AuthenticationService, private router: Router) {
+  constructor(private authService: AuthenticationService, private router: Router, private toggleMenu: ToggleMenuService) {
 
+  }
+
+  close(){
+    this.toggleMenu.toggleMenu()
   }
 
   ngOnInit(): void {
@@ -56,4 +62,5 @@ export class OverlayMenuComponent implements OnInit, OnDestroy {
   logOut(): void {
     this.authService.logOut();
   }
+
 }

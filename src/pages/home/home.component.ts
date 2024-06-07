@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MaterialModule } from '../../app/material.module';
 import { TopAppBarComponent } from '../../components/top-app-bar/top-app-bar.component';
 import { FooterComponent } from '../../components/footer/footer.component';
@@ -8,6 +8,8 @@ import { GridOfNewsComponent } from '../../components/grid-of-news/grid-of-news.
 import { FilterChipsComponent } from '../../components/filter-chips/filter-chips.component';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 import { OverlayMenuComponent } from '../../components/overlay-menu/overlay-menu.component';
+import { ToggleMenuService } from '../../services/toggle-menu.service';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'home',
@@ -17,9 +19,12 @@ import { OverlayMenuComponent } from '../../components/overlay-menu/overlay-menu
   standalone: true
 })
 export class HomeComponent {
+  @ViewChild('sidenav') sidenav: MatSidenav
 
-  constructor(private router: Router) {
-
+  constructor(private router: Router, private toggleMenu: ToggleMenuService) {
+    this.toggleMenu.toggle$.subscribe(() => {
+      this.sidenav.toggle()
+    })
   }
 
   goToArticle(article: NewsArticle) {
