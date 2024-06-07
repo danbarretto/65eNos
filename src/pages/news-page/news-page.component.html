@@ -19,8 +19,8 @@
       }@else {
       <audio (pause)="audioState = State.Pause" aria-label="audio descrição da notícia" (play)="audioState = State.Play"
         controls>
-        <source src="../../assets/audio/teste.mp3" type="audio/mpeg">
-        <source src="../../assets/audio/teste.ogg" type="audio/ogg">
+        <!-- <source src="../../assets/audio/teste.mp3" type="audio/mpeg"> -->
+        <source src={{article.audioContentPath}} type="audio/ogg">
         Your browser does not support the audio element.
       </audio>
       }
