@@ -40,15 +40,19 @@ export class NewsPageComponent implements OnInit {
     this.toggleMenu.toggle$.subscribe(() => {
       this.sidenav.toggle()
     })
+    this.router.events.subscribe(() => this.updateNewsArticle());
   }
 
   ngOnInit() {
+    this.updateNewsArticle();
+  }
+
+  updateNewsArticle() {
     document.body.scrollTop = 0;
     this.scroll.scrollToPosition([0,0])
     this.id = this.route.snapshot.paramMap.get('id')
     this.article = this.newsService.getNewsArticle(this.id)
   }
-
 
   navigateHome() {
     this.router.navigateByUrl('')
