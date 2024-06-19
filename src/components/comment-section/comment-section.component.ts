@@ -1,13 +1,22 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MaterialModule } from '../../app/material.module';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthenticationService, CustomValidators, UserModel } from '../../services/authentication.service';
+import { FormControl, FormGroupDirective, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
+import { AuthenticationService, UserModel } from '../../services/authentication.service';
+import { ErrorStateMatcher } from '@angular/material/core';
 
 export type Comment = {
   userName: string,
   comment: string,
   date: string,
   id: string
+}
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class CustomErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return (control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
 }
 
 @Component({
@@ -21,6 +30,8 @@ export class CommentSectionComponent implements OnInit {
 
   @Input() commentTopic: string
   commentFormControl = new FormControl('', [() => !this.currentUser ? { 'invalid': true } : null])
+
+  commentErrorMatcher = new CustomErrorStateMatcher();
 
   currentUser: UserModel
 
@@ -48,7 +59,15 @@ export class CommentSectionComponent implements OnInit {
     this.currentUser = this.authService.getCurrentUser()
   }
 
+  canComment(): boolean {
+    return this.comment !== '' && this.currentUser !== undefined && this.currentUser.isValid();
+  }
+
   addComent() {
+    if (!this.canComment()) {
+      return;
+    }
+
     const date = new Date()
     const dateStr = date.toLocaleDateString('pt-BR')
 
