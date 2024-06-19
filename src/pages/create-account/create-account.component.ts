@@ -1,9 +1,15 @@
 /* eslint-disable @angular-eslint/component-selector */
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MaterialModule } from '../../app/material.module';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthenticationService, CustomValidators, UserModel } from '../../services/authentication.service';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { TopAppBarComponent } from "../../components/top-app-bar/top-app-bar.component";
+import { OverlayMenuComponent } from "../../components/overlay-menu/overlay-menu.component";
+import { MatSidenav } from '@angular/material/sidenav';
+import { ScrollTopButtonComponent } from "../../components/scroll-top-button/scroll-top-button.component";
+import { FooterComponent } from "../../components/footer/footer.component";
+import { ToggleMenuService } from '../../services/toggle-menu.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class CustomErrorStateMatcher implements ErrorStateMatcher {
@@ -22,13 +28,16 @@ export class ConfirmValidParentErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'create-account',
-  templateUrl: './create-account.component.html',
-  styleUrls: ['./create-account.component.scss'],
-  imports: [MaterialModule, FormsModule, ReactiveFormsModule],
-  standalone: true
+    selector: 'create-account',
+    templateUrl: './create-account.component.html',
+    styleUrls: ['./create-account.component.scss'],
+    standalone: true,
+    imports: [MaterialModule, FormsModule, ReactiveFormsModule, TopAppBarComponent, OverlayMenuComponent, MatSidenav, ScrollTopButtonComponent, FooterComponent]
 })
 export class CreateAccountComponent {
+
+  @ViewChild('sidenav') sidenav: MatSidenav
+
   showPassword = false
   showConfirmPassword = false
 
@@ -47,8 +56,11 @@ export class CreateAccountComponent {
   passwordControl: FormControl;
   confirmPasswordControl: FormControl;
 
-  constructor(private authService: AuthenticationService, private formBuilder: FormBuilder) {
+  constructor(private authService: AuthenticationService, private formBuilder: FormBuilder, private toggleMenu: ToggleMenuService) {
     this.buildForm();
+    this.toggleMenu.toggle$.subscribe(() => {
+      this.sidenav.toggle()
+    })
   }
 
   private buildForm() {
