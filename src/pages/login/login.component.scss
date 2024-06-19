@@ -16,7 +16,7 @@
         flex-direction: column;
         align-items: center;
         gap: 1em;
-
+        overflow-y: hidden;
         mat-form-field {
             width: 100%;
         }
@@ -31,7 +31,15 @@
         gap: 1em;
         width: 30em;
         text-align: center;
+        overflow-y: hidden;
     }
 
 
+}
+
+scroll-top-button {
+    bottom: 2em;
+    right: 0.5em;
+    position: fixed;
+    z-index: 99999;
 }

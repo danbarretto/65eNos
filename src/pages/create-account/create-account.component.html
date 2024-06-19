@@ -10,8 +10,8 @@
     <main class="main-container">
       <img src="assets/logo.svg" alt="Logo do 65eNos, possui um desenho cartoonizado de um idoso com as palavras 65 e Nós ao redor dele em formato circular na cor verde escuro" />
     
-      <section class="inputs">
-        <form [formGroup]="createAccountForm" (keydown.enter)="createAccount()">
+      <section >
+        <form class="inputs" [formGroup]="createAccountForm" (keydown.enter)="createAccount()">
           <mat-form-field class="example-form-field">
             <mat-label>Nome</mat-label>
             <input matInput type="name" formControlName="name">

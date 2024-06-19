@@ -16,7 +16,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 1em;
+        gap: 1.5em;
+        overflow-y: hidden;
 
         mat-form-field {
             width: 100%;
@@ -29,6 +30,7 @@
 
     .buttons {
         display: flex;
+        overflow-y: hidden;
         flex-direction: column;
         gap: 1em;
         width: 30em;
@@ -36,4 +38,17 @@
     }
 
 
+}
+
+.mat-mdc-form-field-subscript-wrapper{
+    height: 3em;
+}
+
+
+
+scroll-top-button {
+    bottom: 2em;
+    right: 0.5em;
+    position: fixed;
+    z-index: 99999;
 }
