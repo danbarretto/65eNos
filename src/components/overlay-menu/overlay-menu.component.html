@@ -16,9 +16,9 @@
   </button>
   }
   @else {
-  <div class="account-buttons">
+  <div class="account-buttons segments">
 
-    <button aria-label="Botão de entrar na conta." (click)="loginIn()" mat-flat-button extended>
+    <button aria-label="Botão de entrar segmentsna conta." (click)="loginIn()" mat-flat-button extended>
       Entrar
     </button>
 
@@ -29,7 +29,7 @@
   }
 
 
-  <div>
+  <div class="segments">
     <mat-divider></mat-divider>
     @for (topic of topics; track $index) {
     <button [ariaLabel]="'Botão de navegar para o tópico de ' + topic" mat-button extended>
@@ -40,7 +40,7 @@
     }
   </div>
 
-  <div>
+  <div class="segments">
     @for (menuLink of links; track $index) {
       <button class="link-button" [ariaLabel]="'Botão de + {{label}}'" (click)="navigateTo(menuLink.route)" mat-button>
         <mat-icon>{{menuLink.icon}}</mat-icon>
@@ -51,7 +51,7 @@
   </div>
 
   @if (currentUser) {
-  <div>
+  <div class="segments">
     <button aria-label="Botão de sair da conta." (click)="logOut()" mat-button>
       <mat-icon>logout</mat-icon>
       Logout

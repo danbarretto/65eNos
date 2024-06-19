@@ -1,13 +1,14 @@
-footer{
+footer {
     width: 100%;
     color: white;
     overflow-x: hidden;
     position: sticky;
     bottom: 0;
-    border-top: 0.2rem solid #ffffff; /* Aqui você pode definir a espessura e a cor da borda */
+    border-top: 0.2rem solid #ffffff;
+    /* Aqui você pode definir a espessura e a cor da borda */
 }
 
-.footer_content{
+.footer_content {
     background-color: #1a1c18;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -17,17 +18,18 @@ footer{
 
 }
 
-.footer_contacts{
+.footer_contacts {
     margin-bottom: 0.5rem;
 }
 
-.footer_social_media{
+.footer_social_media {
     display: flex;
-    gap:1.5rem;
+    justify-content: space-between;
     margin-top: 1.5rem;
+    max-width: 20em;
 }
 
-.footer_social_media .footer_link{
+.footer_social_media .footer_link {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,42 +40,44 @@ footer{
     transition: all 0.4s;
     font-size: 1.6rem;
 }
-.footer_link{
+
+.footer_link {
     color: white;
 }
 
-.footer_social_media .footer_link:hover{
+.footer_social_media .footer_link:hover {
     opacity: 0.5;
 }
 
-.home-link{
-	font-weight: bold;
-	text-decoration: none;
-	color: #69f0ae;
-	text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
-    font-size:1.5rem;
+.home-link {
+    font-weight: bold;
+    text-decoration: none;
+    color: #69f0ae;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+    font-size: 1.5rem;
 }
 
-#instagram{ 
-    background: linear-gradient(purple,rgb(250, 0, 125),orange);
+#instagram {
+    background: linear-gradient(purple, rgb(250, 0, 125), orange);
 }
-#facebook{
+
+#facebook {
     background: rgba(22, 22, 211, 0.651);
 }
 
-#linkedin{
+#linkedin {
     background: rgba(173, 216, 230, 0.568);
 }
 
-#whatsapp{
+#whatsapp {
     background: rgba(4, 218, 4, 0.801);
 }
 
-#youtube{
+#youtube {
     background: rgba(211, 0, 0, 0.801);
 }
 
-.footer_list{
+.footer_list {
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
@@ -81,11 +85,11 @@ footer{
     transition: all 0.4s;
 }
 
-.footer_list .footer_link:hover{
+.footer_list .footer_link:hover {
     color: rgba(131, 250, 141, 0.822);
 }
 
-.footer_copyright{
+.footer_copyright {
     background-color: rgba(3, 170, 59, 0.877);
     display: flex;
     justify-content: center;
@@ -93,14 +97,19 @@ footer{
     padding-top: 0.8rem;
 }
 
-@media screen and (max-width: 426px){
-    .footer_content{
-        grid-template-columns: repeat(1,2fr);
+@media screen and (max-width: 426px) {
+    .footer_content {
+        grid-template-columns: repeat(1, 2fr);
         gap: 2rem;
     }
-    .footer_content{
+
+    .footer_content {
         gap: 0.5rem;
         padding: 1rem 1.5rem;
-    
+
     }
+}
+
+.fa-brands {
+    overflow-y: hidden;
 }
