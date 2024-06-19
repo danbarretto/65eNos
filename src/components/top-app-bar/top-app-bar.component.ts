@@ -1,58 +1,37 @@
-import { Component, Renderer2 } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, Renderer2 } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FontSizeService } from '../../services/font-size.service';
 import { ToggleMenuService } from '../../services/toggle-menu.service';
 import { Router } from '@angular/router';
+import { AcessibilityToolbarComponent } from '../acessibility-toolbar/acessibility-toolbar.component';
 @Component({
   selector: 'top-app-bar',
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule],
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule, AcessibilityToolbarComponent],
   templateUrl: './top-app-bar.component.html',
-  styleUrl: './top-app-bar.component.scss'
+  styleUrl: './top-app-bar.component.scss',
 })
-export class TopAppBarComponent {
+export class TopAppBarComponent implements OnInit {
 
-  currentTheme = 'light-theme';
-  tooltip = 'Aplicar Tema Escuro'
+  showAcessibility = false
 
-  constructor(private renderer: Renderer2, private fontSizeService: FontSizeService, private toggleService: ToggleMenuService, private router: Router) {
-  }
-  
-  toggleContrast() {
-    if (this.currentTheme === 'light-theme') {
-      this.currentTheme = 'dark-theme';
-      this.tooltip = 'Aplicar Tema Claro'
-    } else {
-      this.currentTheme = 'light-theme';
-      this.tooltip = 'Aplicar Tema Escuro'
-    }
-    this.applyTheme(this.currentTheme);
+  constructor(private toggleService: ToggleMenuService, private router: Router, private changeDetector: ChangeDetectorRef) {
   }
 
-  applyTheme(theme: string) {
-    const previousTheme = theme === 'light-theme' ? 'dark-theme' : 'light-theme';
-    this.renderer.removeClass(document.body, previousTheme);
-    this.renderer.addClass(document.body, theme);
+  ngOnInit(): void {
+    let mediaQuery = window.matchMedia("(max-width: 600px)")
+    this.checkShowOrHideAcessibility(mediaQuery)
+    mediaQuery.addEventListener('change', (query) => this.checkShowOrHideAcessibility(query))
   }
 
-  decreaseFontSize() {
-    this.fontSizeService.decreaseFontSize();
-
+  checkShowOrHideAcessibility(query: MediaQueryListEvent | MediaQueryList) {
+    this.showAcessibility = !query.matches
   }
-
 
   toggleMenu() {
     this.toggleService.toggleMenu()
-  }
-
-  openHelp(){
-    this.router.navigateByUrl('noticias/1')
-  }
-
-  increaseFontSize() {
-    this.fontSizeService.increaseFontSize();
   }
 
   goHome() {

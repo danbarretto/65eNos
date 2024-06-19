@@ -4,6 +4,7 @@ import { AuthenticationService, UserModel } from '../../services/authentication.
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs'
 import { ToggleMenuService } from '../../services/toggle-menu.service';
+import { AcessibilityToolbarComponent } from '../acessibility-toolbar/acessibility-toolbar.component';
 
 interface MenuLink {
   label: string;
@@ -16,12 +17,13 @@ interface MenuLink {
   templateUrl: './overlay-menu.component.html',
   styleUrls: ['./overlay-menu.component.scss'],
   standalone: true,
-  imports: [MaterialModule]
+  imports: [MaterialModule, AcessibilityToolbarComponent]
 })
 export class OverlayMenuComponent implements OnInit, OnDestroy {
 
   currentUser: UserModel
   userFullName = 'Usuário'
+  showAcessibility = false
 
   topics: string[] = ["Bem-estar", "Saúde", "Social", "Alimentação"]
   links: MenuLink[] = [
@@ -35,7 +37,7 @@ export class OverlayMenuComponent implements OnInit, OnDestroy {
 
   }
 
-  close(){
+  close() {
     this.toggleMenu.toggleMenu()
   }
 
@@ -44,10 +46,19 @@ export class OverlayMenuComponent implements OnInit, OnDestroy {
       this.currentUser = user
       this.userFullName = this.currentUser?.getFullName()
     })
+
+
+    let mediaQuery = window.matchMedia("(max-width: 600px)")
+    this.checkShowOrHideAcessibility(mediaQuery)
+    mediaQuery.addEventListener('change', (query) => this.checkShowOrHideAcessibility(query))
   }
 
   ngOnDestroy() {
     this.userSub.unsubscribe()
+  }
+
+  checkShowOrHideAcessibility(query: MediaQueryListEvent | MediaQueryList) {
+    this.showAcessibility = query.matches
   }
 
   loginIn(): void {
@@ -63,7 +74,7 @@ export class OverlayMenuComponent implements OnInit, OnDestroy {
   }
 
   navigateTo(path: string): void {
-    if (path){
+    if (path) {
       this.router.navigateByUrl(path);
     }
   }

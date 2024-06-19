@@ -1,5 +1,6 @@
 <div class="container">
 
+
   <div class="menu-label">
     <h2>
       Menu
@@ -9,6 +10,11 @@
     </button>
   </div>
 
+  @if(showAcessibility){
+    <div class="segments">
+      <acessibility-toolbar></acessibility-toolbar>
+    </div>
+  }
   @if (currentUser) {
   <button aria-label="Botão de usuário." mat-button>
     <mat-icon> account_circle </mat-icon>
@@ -42,11 +48,11 @@
 
   <div class="segments">
     @for (menuLink of links; track $index) {
-      <button class="link-button" [ariaLabel]="'Botão de + {{label}}'" (click)="navigateTo(menuLink.route)" mat-button>
-        <mat-icon>{{menuLink.icon}}</mat-icon>
-        {{menuLink.label}}
-      </button>
-      <mat-divider></mat-divider>
+    <button class="link-button" [ariaLabel]="'Botão de + {{label}}'" (click)="navigateTo(menuLink.route)" mat-button>
+      <mat-icon>{{menuLink.icon}}</mat-icon>
+      {{menuLink.label}}
+    </button>
+    <mat-divider></mat-divider>
     }
   </div>
 
